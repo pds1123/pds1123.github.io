@@ -1186,10 +1186,37 @@ a {
   background: var(--plum-600);
 }
 
-.tech-active-visual img {
+[data-tech="react"] { --tech-brand: #61dafb; }
+[data-tech="typescript"] { --tech-brand: #3178c6; }
+[data-tech="html"] { --tech-brand: #e34f26; }
+[data-tech="css"] { --tech-brand: #1572b6; }
+[data-tech="dotnet"] { --tech-brand: #512bd4; }
+[data-tech="csharp"] { --tech-brand: #9b4f96; }
+[data-tech="node"] { --tech-brand: #339933; }
+[data-tech="java"] { --tech-brand: #e76f00; }
+[data-tech="python"] { --tech-brand: #3776ab; }
+[data-tech="postgresql"] { --tech-brand: #4169e1; }
+[data-tech="prisma"] { --tech-brand: #2d3748; }
+[data-tech="sqlserver"] { --tech-brand: #cc2927; }
+[data-tech="aws"] { --tech-brand: #ff9900; }
+[data-tech="azure"] { --tech-brand: #0078d4; }
+[data-tech="git"] { --tech-brand: #f05032; }
+[data-tech="vitest"] { --tech-brand: #6e9f18; }
+
+.tech-logo {
+  display: block;
+  color: var(--plum-600);
+  fill: currentColor;
+  stroke: currentColor;
+  transition:
+    color 180ms ease,
+    transform 220ms var(--ease-out);
+}
+
+.tech-active-visual .tech-logo {
   width: clamp(82px, 10vw, 118px);
   height: clamp(82px, 10vw, 118px);
-  object-fit: contain;
+  color: var(--tech-brand, var(--plum-300));
   filter: drop-shadow(0 6px 6px rgba(117, 26, 72, 0.18));
 }
 
@@ -1304,16 +1331,15 @@ a {
   color: var(--white);
 }
 
-.tech-icon-list img {
+.tech-icon-list .tech-logo {
   width: 52px;
   height: 52px;
   grid-row: 1 / 3;
-  object-fit: contain;
-  transition: transform 220ms var(--ease-out);
 }
 
-.tech-icon-list button:hover img,
-.tech-icon-list button[aria-pressed="true"] img {
+.tech-icon-list button:hover .tech-logo,
+.tech-icon-list button[aria-pressed="true"] .tech-logo {
+  color: var(--tech-brand);
   transform: scale(1.12) rotate(-2deg);
 }
 
@@ -1930,7 +1956,7 @@ a {
     column-gap: 10px;
   }
 
-  .tech-icon-list img {
+  .tech-icon-list .tech-logo {
     width: 40px;
     height: 40px;
   }

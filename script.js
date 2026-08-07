@@ -212,117 +212,118 @@ const toolContent = {
     name: "React",
     copy: "Reusable interfaces for learning, management, filtering, and review workflows.",
     evidence: ["SkillPath question engine", "Movies Management frontend"],
-    icon: "assets/tech/react.svg",
+    icon: "tech-react",
   },
   typescript: {
     group: "Interface",
     name: "TypeScript",
     copy: "Typed application boundaries across reusable client components and REST service code.",
     evidence: ["SkillPath application state", "User & Terms API"],
-    icon: "assets/tech/typescript.svg",
+    icon: "tech-typescript",
   },
   html: {
     group: "Interface",
     name: "HTML5",
     copy: "Semantic, zero-build interfaces that stay portable and easy to deploy.",
     evidence: ["NewStart NZ map", "This portfolio"],
-    icon: "assets/tech/html5.svg",
+    icon: "tech-html",
   },
   css: {
     group: "Interface",
     name: "CSS3",
     copy: "Responsive layouts, accessible states, and purposeful interface motion without a heavy UI layer.",
     evidence: ["Responsive project layouts", "Keyboard-visible interaction states"],
-    icon: "assets/tech/css3.svg",
+    icon: "tech-css",
   },
   dotnet: {
     group: "Services",
     name: ".NET",
     copy: "A structured API layer for authenticated movie and theatre management workflows.",
     evidence: ["ASP.NET Core API", "Azure-ready service configuration"],
-    icon: "assets/tech/dotnet.svg",
+    icon: "tech-dotnet",
   },
   csharp: {
     group: "Services",
     name: "C#",
     copy: "Application logic across web services and real-time Unity gameplay systems.",
     evidence: ["Movies Management backend", "Networked Unity client features"],
-    icon: "assets/tech/csharp.svg",
+    icon: "tech-csharp",
   },
   node: {
     group: "Services",
     name: "Node.js",
     copy: "REST service behaviour with validation, lifecycle rules, persistence, and centralised errors.",
     evidence: ["User & Terms API", "Critical integration flows"],
-    icon: "assets/tech/nodejs.svg",
+    icon: "tech-node",
   },
   java: {
     group: "Services",
     name: "Java",
     copy: "Object-oriented service logic with tests around classification and core behaviour.",
     evidence: ["Java service logic", "Unit-tested behaviour"],
-    icon: "assets/tech/java.svg",
+    icon: "tech-java",
   },
   python: {
     group: "Data",
     name: "Python",
     copy: "Data extraction and reconciliation pipelines that turn inconsistent sources into usable application data.",
     evidence: ["NewStart NZ mapping layer", "SkillPath source extraction"],
-    icon: "assets/tech/python.svg",
+    icon: "tech-python",
   },
   postgresql: {
     group: "Data",
     name: "PostgreSQL",
     copy: "Relational persistence for users, lifecycle state, and versioned terms acceptance.",
     evidence: ["User & Terms data model", "Integration-tested persistence"],
-    icon: "assets/tech/postgresql.svg",
+    icon: "tech-postgresql",
   },
   prisma: {
     group: "Data",
     name: "Prisma",
     copy: "Typed persistence boundaries and migrations for explicit user and terms rules.",
     evidence: ["Soft-delete email reuse", "Versioned terms records"],
-    icon: "assets/tech/prisma.svg",
+    icon: "tech-prisma",
   },
   sqlserver: {
     group: "Data",
     name: "SQL Server",
     copy: "Relational storage behind movie, theatre, user, and role-aware management flows.",
     evidence: ["EF Core persistence", "Movies Management data"],
-    icon: "assets/tech/sqlserver.svg",
+    icon: "tech-sqlserver",
   },
   aws: {
     group: "Cloud + quality",
     name: "AWS",
     copy: "Cloud image analysis and encrypted object storage used as backend building blocks.",
     evidence: ["AWS Certified Cloud Practitioner", "Rekognition and S3"],
-    icon: "assets/tech/aws.svg",
+    icon: "tech-aws",
   },
   azure: {
     group: "Cloud + quality",
     name: "Azure",
     copy: "Deployment configuration for a full-stack React and ASP.NET Core application.",
     evidence: ["Frontend deployment setup", "API and SQL configuration"],
-    icon: "assets/tech/azure.svg",
+    icon: "tech-azure",
   },
   git: {
     group: "Cloud + quality",
     name: "Git",
     copy: "Versioned delivery across the public projects, data changes, tests, and deployment configuration.",
     evidence: ["Reviewable project history", "GitHub Pages delivery"],
-    icon: "assets/tech/git.svg",
+    icon: "tech-git",
   },
   vitest: {
     group: "Cloud + quality",
     name: "Vitest",
     copy: "Fast integration coverage for the API behaviour most likely to break user lifecycle rules.",
     evidence: ["User creation and deletion", "Terms acceptance flows"],
-    icon: "assets/tech/vitest.svg",
+    icon: "tech-vitest",
   },
 };
 
-const toolButtons = [...document.querySelectorAll("[data-tech]")];
+const toolButtons = [...document.querySelectorAll("button[data-tech]")];
 const toolPreviewIcon = document.querySelector("[data-tech-preview-icon]");
+const toolPreviewUse = document.querySelector("[data-tech-preview-use]");
 const toolPreviewTitle = document.querySelector("[data-tech-preview-title]");
 const toolPreviewCopy = document.querySelector("[data-tech-preview-copy]");
 const toolPreviewEvidence = document.querySelector("[data-tech-preview-evidence]");
@@ -333,7 +334,8 @@ toolButtons.forEach((button) => {
     if (!content) return;
 
     toolButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-    toolPreviewIcon.src = content.icon;
+    toolPreviewIcon.dataset.tech = button.dataset.tech;
+    toolPreviewUse.setAttribute("href", `assets/tech/icons.svg#${content.icon}`);
     toolPreviewTitle.textContent = content.name;
     toolPreviewCopy.textContent = content.copy;
     toolPreviewEvidence.replaceChildren(
