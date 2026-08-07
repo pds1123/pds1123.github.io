@@ -178,7 +178,6 @@ a {
   border-radius: 50%;
   background: var(--primary-light);
   color: var(--accent);
-  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 800;
 }
@@ -299,7 +298,6 @@ a {
   align-items: center;
   gap: 10px;
   color: var(--ink-soft);
-  font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 680;
 }
@@ -453,7 +451,6 @@ a {
   justify-content: space-between;
   gap: 24px;
   color: var(--accent);
-  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 750;
 }
@@ -492,7 +489,6 @@ a {
 }
 
 .stack-tabs span {
-  font-family: var(--font-mono);
   font-size: 11px;
 }
 
@@ -536,7 +532,6 @@ a {
 .contact-note {
   margin: 0 0 18px;
   color: var(--primary-deep);
-  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 750;
   letter-spacing: 0.025em;
@@ -731,7 +726,6 @@ a {
   margin: 0 0 0 8px;
   overflow: hidden;
   color: var(--muted);
-  font-family: var(--font-mono);
   font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -766,18 +760,21 @@ a {
   width: 44px;
   place-items: center;
   color: var(--primary-deep);
-  font-family: var(--font-mono);
 }
 
 .data-bridge div span {
   color: var(--muted);
-  font-family: var(--font-mono);
   font-size: 10px;
 }
 
 .data-bridge strong {
   margin-top: 4px;
   font-size: 17px;
+}
+
+.data-bridge strong,
+.tech-group-heading span {
+  font-family: var(--font-mono);
 }
 
 .data-bridge .bridge-result {
@@ -834,7 +831,6 @@ a {
   border-radius: var(--radius-sm);
   background: var(--surface-soft);
   color: var(--accent);
-  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
 }
@@ -872,9 +868,14 @@ a {
   border-radius: 999px;
   background: var(--surface);
   color: var(--ink-soft);
-  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 680;
+}
+
+.stack-tabs strong,
+.tech-list li,
+.tech-icon-list span {
+  font-family: var(--font-mono);
 }
 
 .project-card-compact {
@@ -1007,7 +1008,6 @@ a {
 
 .process-tabs button span {
   color: var(--primary-deep);
-  font-family: var(--font-mono);
   font-size: 9px;
 }
 
@@ -1047,7 +1047,6 @@ a {
   border-radius: var(--radius-sm);
   background: var(--primary-light);
   color: var(--accent);
-  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 680;
 }
@@ -1072,7 +1071,6 @@ a {
   display: block;
   margin-bottom: 10px;
   color: var(--muted);
-  font-family: var(--font-mono);
   font-size: 10px;
 }
 
@@ -1265,7 +1263,6 @@ a {
 }
 
 .tech-group-heading span {
-  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 750;
 }
@@ -1334,7 +1331,6 @@ a {
   margin-top: 4px;
   overflow: hidden;
   color: var(--muted);
-  font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 650;
   line-height: 1.3;
@@ -1426,7 +1422,6 @@ a {
 
 .social-links a {
   color: var(--accent);
-  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 750;
 }
@@ -1489,7 +1484,6 @@ a {
   align-items: center;
   gap: 8px;
   color: var(--primary-deep);
-  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 750;
   letter-spacing: 0;
