@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DP">
   <style>
-    .bg { fill: oklch(0.72 0.15 80); }
-    .text { fill: oklch(0.19 0.035 245); font: 700 20px ui-monospace, monospace; }
+    .bg { fill: #f8dce7; }
+    .ring { fill: none; stroke: #a52f62; stroke-width: 2; }
+    .text { fill: #751a48; font: 700 20px ui-monospace, monospace; }
   </style>
-  <rect class="bg" width="64" height="64" rx="10" />
+  <circle class="bg" cx="32" cy="32" r="30" />
+  <circle class="ring" cx="32" cy="32" r="29" />
   <text class="text" x="32" y="39" text-anchor="middle">DP</text>
 </svg>

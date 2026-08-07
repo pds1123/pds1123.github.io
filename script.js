@@ -20,24 +20,31 @@ menuButton?.addEventListener("click", () => {
   document.body.classList.toggle("menu-open", !isOpen);
 });
 
-document.addEventListener("keydown", (event) => {
-  if (event.key !== "Escape" || menuButton?.getAttribute("aria-expanded") !== "true") return;
-  closeMenu();
-  menuButton.focus();
-});
-
 navLinks.forEach((link) => link.addEventListener("click", closeMenu));
 
 window.addEventListener("resize", () => {
-  if (window.innerWidth > 720) closeMenu();
+  if (window.innerWidth > 820) closeMenu();
 });
 
-const updateHeader = () => {
+const scrollProgress = document.querySelector("[data-scroll-progress]");
+let scrollFrame = 0;
+
+const updateScrollState = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 12);
+  const distance = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = distance > 0 ? Math.min(window.scrollY / distance, 1) : 0;
+  if (scrollProgress) scrollProgress.style.width = `${progress * 100}%`;
+  scrollFrame = 0;
 };
 
-updateHeader();
-window.addEventListener("scroll", updateHeader, { passive: true });
+const requestScrollUpdate = () => {
+  if (scrollFrame) return;
+  scrollFrame = window.requestAnimationFrame(updateScrollState);
+};
+
+updateScrollState();
+window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+window.addEventListener("resize", requestScrollUpdate);
 
 if ("IntersectionObserver" in window && sections.length) {
   const sectionObserver = new IntersectionObserver(
@@ -54,11 +61,305 @@ if ("IntersectionObserver" in window && sections.length) {
         else link.removeAttribute("aria-current");
       });
     },
-    { rootMargin: "-20% 0px -62%", threshold: [0.05, 0.25, 0.5] },
+    { rootMargin: "-18% 0px -64%", threshold: [0.05, 0.25, 0.5] },
   );
 
   sections.forEach((section) => sectionObserver.observe(section));
 }
+
+const stackContent = {
+  interface: {
+    kicker: "Interface evidence",
+    copy: "Reusable React flows, responsive layouts, map interactions, and accessible controls.",
+    link: "See SkillPath and NewStart NZ",
+  },
+  services: {
+    kicker: "Service evidence",
+    copy: "REST endpoints, authentication, validation, error boundaries, and role-aware application behaviour.",
+    link: "See Movies Management and User API",
+  },
+  data: {
+    kicker: "Data and cloud evidence",
+    copy: "Relational persistence, source reconciliation, encrypted storage, and Azure and AWS integrations.",
+    link: "See NewStart NZ and internship work",
+  },
+};
+
+const stackTabs = [...document.querySelectorAll("[data-stack-tab]")];
+const stackKicker = document.querySelector("[data-stack-kicker]");
+const stackCopy = document.querySelector("[data-stack-copy]");
+const stackLink = document.querySelector("[data-stack-link]");
+
+stackTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const key = tab.dataset.stackTab;
+    const content = stackContent[key];
+    if (!content) return;
+    stackTabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
+    stackKicker.textContent = content.kicker;
+    stackCopy.textContent = content.copy;
+    stackLink.textContent = content.link;
+  });
+});
+
+const filterButtons = [...document.querySelectorAll("[data-project-filter]")];
+const projects = [...document.querySelectorAll("[data-project]")];
+const filterEmpty = document.querySelector("[data-filter-empty]");
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.projectFilter;
+    let visibleCount = 0;
+
+    filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    projects.forEach((project) => {
+      const categories = project.dataset.category.split(" ");
+      const isVisible = filter === "all" || categories.includes(filter);
+      project.classList.toggle("is-filtered", !isVisible);
+      if (isVisible) visibleCount += 1;
+    });
+
+    if (filterEmpty) filterEmpty.hidden = visibleCount !== 0;
+    requestScrollUpdate();
+  });
+});
+
+const processContent = {
+  frame: {
+    kicker: "Start with the decision",
+    title: "Frame the user, constraint, and useful outcome.",
+    copy: "I separate the real user question from the first technical solution. In NewStart NZ, that meant starting with ‘where can I afford to live safely?’ rather than ‘build a map.’",
+    evidence: "Evidence: requirements, source audit, explicit scope",
+  },
+  model: {
+    kicker: "Make boundaries explicit",
+    title: "Model the data and system edges before the screen.",
+    copy: "I identify where names, identifiers, ownership, and lifecycle rules disagree. This exposes the reconciliation layer, persistence model, and API contracts that the interface depends on.",
+    evidence: "Evidence: 556 + 416 source regions mapped to 63 suburbs",
+  },
+  build: {
+    kicker: "Deliver a complete path",
+    title: "Build the smallest end-to-end flow that proves the model.",
+    copy: "I connect interface, service, persistence, and deployment concerns early. That keeps design choices grounded in behaviour rather than isolated component work.",
+    evidence: "Evidence: runnable public projects with sample data",
+  },
+  verify: {
+    kicker: "Protect critical behaviour",
+    title: "Test the risky paths and expose the gaps.",
+    copy: "I test authentication, validation, persistence, cloud boundaries, and edge cases. Missing source coverage stays labelled instead of being silently replaced with a convenient value.",
+    evidence: "Evidence: unit and integration tests, explicit coverage reporting",
+  },
+};
+
+const processTabs = [...document.querySelectorAll("[data-process-tab]")];
+const processKicker = document.querySelector("[data-process-kicker]");
+const processTitle = document.querySelector("[data-process-title]");
+const processCopy = document.querySelector("[data-process-copy]");
+const processEvidence = document.querySelector("[data-process-evidence]");
+
+processTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const content = processContent[tab.dataset.processTab];
+    if (!content) return;
+    processTabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
+    processKicker.textContent = content.kicker;
+    processTitle.textContent = content.title;
+    processCopy.textContent = content.copy;
+    processEvidence.textContent = content.evidence;
+  });
+});
+
+const skillContent = {
+  frontend: {
+    label: "Frontend",
+    title: "Interfaces that make complex workflows understandable.",
+    copy: "React, TypeScript, semantic HTML, responsive CSS, and Leaflet.",
+    evidence: ["SkillPath multi-format question engine", "NewStart NZ interactive suburb map"],
+  },
+  backend: {
+    label: "Backend",
+    title: "Services with clear contracts and lifecycle rules.",
+    copy: "ASP.NET Core, Node.js, Express, REST APIs, authentication, and validation.",
+    evidence: ["Movies Management role-based API", "User and Terms versioning flows"],
+  },
+  data: {
+    label: "Data",
+    title: "Models that preserve meaning across system boundaries.",
+    copy: "PostgreSQL, SQL Server, Prisma, EF Core, Pandas, and source reconciliation.",
+    evidence: ["NewStart NZ geographic mapping layer", "Soft-delete email reuse constraints"],
+  },
+  cloud: {
+    label: "Cloud",
+    title: "Cloud services used as part of a working product path.",
+    copy: "Azure deployment configuration, AWS Rekognition, S3, and encrypted metadata storage.",
+    evidence: ["Azure-ready movie management application", "AWS-backed internship service"],
+  },
+  quality: {
+    label: "Quality",
+    title: "Tests focused on behaviour that would be costly to break.",
+    copy: "Vitest, Supertest, unit testing, integration testing, and explicit error handling.",
+    evidence: ["Critical User API integration flows", "Core and cloud behaviour tests during internship"],
+  },
+};
+
+const skillButtons = [...document.querySelectorAll("[data-skill]")];
+const skillLabel = document.querySelector("[data-skill-label]");
+const skillTitle = document.querySelector("[data-skill-title]");
+const skillCopy = document.querySelector("[data-skill-copy]");
+const skillEvidence = document.querySelector("[data-skill-evidence]");
+
+skillButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const content = skillContent[button.dataset.skill];
+    if (!content) return;
+    skillButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    skillLabel.textContent = content.label;
+    skillTitle.textContent = content.title;
+    skillCopy.textContent = content.copy;
+    skillEvidence.replaceChildren(
+      ...content.evidence.map((entry) => {
+        const item = document.createElement("li");
+        item.textContent = entry;
+        return item;
+      }),
+    );
+  });
+});
+
+const projectDetails = {
+  newstart: {
+    kicker: "Civic data · Geospatial reconciliation",
+    title: "NewStart NZ",
+    lead: "A housing and safety guide for people making an unfamiliar Auckland suburb decision.",
+    problem: "Official rent and police data answer related questions but use incompatible geographic boundaries and naming systems.",
+    engineering: "A reconciliation layer folds 556 rent areas and 416 police areas into 63 suburb names, followed by a zero-build Leaflet interface.",
+    evidence: ["59 suburbs with rent data", "61 suburbs with crime data", "Missing coverage remains visible"],
+    stack: "Python · MBIE Market Rent API v2 · NZ Police data · Leaflet · HTML",
+    href: "https://github.com/pds1123/newstart-nz",
+  },
+  skillpath: {
+    kicker: "Learning product · React application",
+    title: "SkillPath",
+    lead: "A study experience that supports different certification tracks without duplicating the learning engine.",
+    problem: "Multiple question structures, review states, and certification progress need to share one consistent interface.",
+    engineering: "Reusable renderers handle seven question formats while state stays scoped by certification. A Python pipeline normalises source material.",
+    evidence: ["Seven question formats", "Timed exam and review flows", "Runnable sample data"],
+    stack: "React 19 · TypeScript · Vite · Tailwind CSS · Python",
+    href: "https://github.com/pds1123/skillpath",
+  },
+  movies: {
+    kicker: "Full stack · Role-aware management",
+    title: "Movies Management App",
+    lead: "A complete management workflow spanning a React interface, ASP.NET Core API, SQL persistence, and Azure configuration.",
+    problem: "Movie and theatre records require different permissions, media handling, locations, and useful browse controls.",
+    engineering: "JWT authentication and role checks protect API behaviour; EF Core models persistence while the UI handles uploads, maps, pagination, and filters.",
+    evidence: ["Role-based access", "Image and map inputs", "Pagination and filtering"],
+    stack: ".NET 9 · React 19 · EF Core · SQL Server · Azure",
+    href: "https://github.com/pds1123/movies-management-app",
+  },
+  "user-api": {
+    kicker: "Backend · Versioned terms",
+    title: "User & Terms API",
+    lead: "A TypeScript REST API centred on validation, persistence rules, and tested user lifecycle behaviour.",
+    problem: "User deletion, email reuse, and terms acceptance create connected lifecycle and data-integrity rules.",
+    engineering: "Zod validates request boundaries, Prisma and PostgreSQL preserve state, and integration tests cover critical flows and centralised errors.",
+    evidence: ["Soft-delete email reuse", "Versioned terms acceptance", "Integration tests for critical flows"],
+    stack: "Node.js · Express · TypeScript · Prisma · PostgreSQL · Vitest",
+    href: "https://github.com/pds1123/User_API",
+  },
+};
+
+const projectDialog = document.querySelector("[data-project-dialog]");
+const projectOpeners = [...document.querySelectorAll("[data-project-open]")];
+const projectClose = document.querySelector("[data-project-close]");
+const projectDialogKicker = document.querySelector("[data-project-dialog-kicker]");
+const projectDialogTitle = document.querySelector("[data-project-dialog-title]");
+const projectDialogLead = document.querySelector("[data-project-dialog-lead]");
+const projectDialogProblem = document.querySelector("[data-project-dialog-problem]");
+const projectDialogEngineering = document.querySelector("[data-project-dialog-engineering]");
+const projectDialogEvidence = document.querySelector("[data-project-dialog-evidence]");
+const projectDialogStack = document.querySelector("[data-project-dialog-stack]");
+const projectDialogLink = document.querySelector("[data-project-dialog-link]");
+
+projectOpeners.forEach((button) => {
+  button.addEventListener("click", () => {
+    const project = projectDetails[button.dataset.projectOpen];
+    if (!project || !projectDialog) return;
+    projectDialogKicker.textContent = project.kicker;
+    projectDialogTitle.textContent = project.title;
+    projectDialogLead.textContent = project.lead;
+    projectDialogProblem.textContent = project.problem;
+    projectDialogEngineering.textContent = project.engineering;
+    projectDialogStack.textContent = project.stack;
+    projectDialogLink.href = project.href;
+    projectDialogEvidence.replaceChildren(
+      ...project.evidence.map((entry) => {
+        const item = document.createElement("li");
+        item.textContent = entry;
+        return item;
+      }),
+    );
+    projectDialog.showModal();
+  });
+});
+
+projectClose?.addEventListener("click", () => projectDialog?.close());
+projectDialog?.addEventListener("click", (event) => {
+  if (event.target === projectDialog) projectDialog.close();
+});
+
+const commandDialog = document.querySelector("[data-command-dialog]");
+const commandOpeners = [...document.querySelectorAll("[data-command-open]")];
+const commandClose = document.querySelector("[data-command-close]");
+const commandSearch = document.querySelector("[data-command-search]");
+const commandItems = [...document.querySelectorAll("[data-command-item]")];
+const commandEmpty = document.querySelector("[data-command-empty]");
+
+const openCommand = () => {
+  if (!commandDialog) return;
+  closeMenu();
+  commandDialog.showModal();
+  commandSearch.value = "";
+  commandItems.forEach((item) => (item.hidden = false));
+  if (commandEmpty) commandEmpty.hidden = true;
+  window.requestAnimationFrame(() => commandSearch?.focus());
+};
+
+commandOpeners.forEach((button) => button.addEventListener("click", openCommand));
+commandClose?.addEventListener("click", () => commandDialog?.close());
+commandDialog?.addEventListener("click", (event) => {
+  if (event.target === commandDialog) commandDialog.close();
+});
+
+commandSearch?.addEventListener("input", () => {
+  const query = commandSearch.value.trim().toLowerCase();
+  let visibleCount = 0;
+  commandItems.forEach((item) => {
+    const searchable = `${item.textContent} ${item.dataset.search}`.toLowerCase();
+    const isVisible = searchable.includes(query);
+    item.hidden = !isVisible;
+    if (isVisible) visibleCount += 1;
+  });
+  if (commandEmpty) commandEmpty.hidden = visibleCount !== 0;
+});
+
+commandItems.forEach((item) => {
+  item.addEventListener("click", () => commandDialog?.close());
+});
+
+document.addEventListener("keydown", (event) => {
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+    event.preventDefault();
+    if (commandDialog?.open) commandDialog.close();
+    else openCommand();
+    return;
+  }
+
+  if (event.key === "Escape" && menuButton?.getAttribute("aria-expanded") === "true") {
+    closeMenu();
+    menuButton.focus();
+  }
+});
 
 const year = document.querySelector("[data-year]");
 if (year) year.textContent = String(new Date().getFullYear());
