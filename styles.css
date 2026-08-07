@@ -145,13 +145,8 @@ a {
   z-index: 40;
   top: 0;
   height: var(--header-height);
-  border-bottom: 1px solid transparent;
-  background: rgba(255, 248, 251, 0.96);
-  transition: border-color 180ms ease;
-}
-
-.site-header.is-scrolled {
-  border-color: var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
 }
 
 .header-inner {

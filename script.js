@@ -1,4 +1,3 @@
-const header = document.querySelector("[data-header]");
 const menuButton = document.querySelector("[data-menu-button]");
 const menu = document.querySelector("[data-menu]");
 const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
@@ -30,7 +29,6 @@ const scrollProgress = document.querySelector("[data-scroll-progress]");
 let scrollFrame = 0;
 
 const updateScrollState = () => {
-  header?.classList.toggle("is-scrolled", window.scrollY > 12);
   const distance = document.documentElement.scrollHeight - window.innerHeight;
   const progress = distance > 0 ? Math.min(window.scrollY / distance, 1) : 0;
   if (scrollProgress) scrollProgress.style.width = `${progress * 100}%`;
