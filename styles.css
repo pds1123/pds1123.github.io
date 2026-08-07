@@ -561,11 +561,17 @@ a {
   content: "";
 }
 
-.work-section,
+.work-section {
+  padding: clamp(88px, 10vw, 140px) 0;
+}
+
 .process-section,
-.skills-section,
 .notes-section {
-  padding: clamp(92px, 11vw, 152px) 0;
+  padding: clamp(48px, 6vw, 72px) 0;
+}
+
+.skills-section {
+  padding: clamp(88px, 10vw, 140px) 0 0;
 }
 
 .work-section {
@@ -883,11 +889,18 @@ a {
 
 .project-card-compact {
   display: grid;
-  min-height: 260px;
-  padding: 40px;
-  grid-template-columns: 130px minmax(0, 1fr) 100px;
-  gap: clamp(24px, 5vw, 64px);
-  align-items: start;
+  min-height: 0;
+  padding: 22px 32px;
+  grid-template-columns: minmax(0, 1fr) 100px;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+}
+
+.project-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .project-card-compact h3 {
@@ -899,6 +912,10 @@ a {
   margin: 16px 0 0;
   color: var(--ink-soft);
   font-size: 16px;
+}
+
+.project-card-compact .tech-list {
+  margin-top: 18px;
 }
 
 .compact-actions {
@@ -1027,7 +1044,7 @@ a {
 }
 
 .process-panel {
-  min-height: 350px;
+  min-height: 0;
   margin-top: 14px;
   padding: clamp(28px, 5vw, 52px) 0 0;
 }
@@ -1139,7 +1156,7 @@ a {
 }
 
 .tech-showcase {
-  margin-top: clamp(80px, 10vw, 132px);
+  margin-top: clamp(48px, 6vw, 72px);
   background: var(--plum-900);
   color: var(--white);
 }
@@ -1416,7 +1433,7 @@ a {
 }
 
 .contact-section {
-  padding: clamp(90px, 11vw, 138px) 0;
+  padding: clamp(48px, 6vw, 72px) 0;
   background: var(--primary);
 }
 
@@ -1684,7 +1701,7 @@ a {
   .hero-grid,
   .process-grid,
   .skills-grid {
-    gap: 64px;
+    gap: 48px;
   }
 
   .section-heading {
@@ -1904,8 +1921,14 @@ a {
 
   .project-card-compact {
     grid-template-columns: 1fr;
-    padding: 28px 24px;
+    padding: 24px;
     gap: 18px;
+  }
+
+  .project-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .compact-actions {
@@ -1917,7 +1940,7 @@ a {
   }
 
   .process-panel {
-    min-height: 390px;
+    min-height: 0;
   }
 
   .education-list {
@@ -1931,10 +1954,6 @@ a {
   .skill-options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .tech-showcase {
-    margin-top: 72px;
   }
 
   .tech-showcase-heading {
