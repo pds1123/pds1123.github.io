@@ -728,11 +728,9 @@ a {
 .project-visual img {
   width: 100%;
   height: auto;
-  aspect-ratio: 1.16;
   border: 1px solid var(--line);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
-  object-fit: cover;
-  object-position: top left;
+  object-fit: contain;
 }
 
 .data-bridge {
@@ -811,6 +809,8 @@ a {
   position: relative;
   z-index: 1;
   width: min(62%, 300px);
+  height: auto;
+  object-fit: contain;
   filter: drop-shadow(0 10px 14px rgba(125, 33, 78, 0.2));
 }
 
@@ -1869,10 +1869,6 @@ a {
 
   .project-visual {
     padding: 20px;
-  }
-
-  .project-visual img {
-    aspect-ratio: 0.95;
   }
 
   .data-bridge {
