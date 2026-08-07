@@ -81,7 +81,7 @@ const stackContent = {
   data: {
     kicker: "Data and cloud evidence",
     copy: "Relational persistence, source reconciliation, encrypted storage, and Azure and AWS integrations.",
-    link: "See NewStart NZ and internship work",
+    link: "See NewStart NZ and Movies Management",
   },
 };
 
@@ -192,13 +192,13 @@ const skillContent = {
     label: "Cloud",
     title: "Cloud services used as part of a working product path.",
     copy: "Azure deployment configuration, AWS Rekognition, S3, and encrypted metadata storage.",
-    evidence: ["Azure-ready movie management application", "AWS-backed internship service"],
+    evidence: ["Azure-ready movie management application", "AWS service integration and encrypted storage"],
   },
   quality: {
     label: "Quality",
     title: "Tests focused on behaviour that would be costly to break.",
     copy: "Vitest, Supertest, unit testing, integration testing, and explicit error handling.",
-    evidence: ["Critical User API integration flows", "Core and cloud behaviour tests during internship"],
+    evidence: ["Critical User API integration flows", "Unit-tested Java and cloud behaviour"],
   },
 };
 
@@ -226,6 +226,148 @@ skillButtons.forEach((button) => {
   });
 });
 
+const toolContent = {
+  react: {
+    group: "Interface",
+    name: "React",
+    copy: "Reusable interfaces for learning, management, filtering, and review workflows.",
+    evidence: ["SkillPath question engine", "Movies Management frontend"],
+    icon: "assets/tech/react.svg",
+  },
+  typescript: {
+    group: "Interface",
+    name: "TypeScript",
+    copy: "Typed application boundaries across reusable client components and REST service code.",
+    evidence: ["SkillPath application state", "User & Terms API"],
+    icon: "assets/tech/typescript.svg",
+  },
+  html: {
+    group: "Interface",
+    name: "HTML5",
+    copy: "Semantic, zero-build interfaces that stay portable and easy to deploy.",
+    evidence: ["NewStart NZ map", "This portfolio"],
+    icon: "assets/tech/html5.svg",
+  },
+  css: {
+    group: "Interface",
+    name: "CSS3",
+    copy: "Responsive layouts, accessible states, and purposeful interface motion without a heavy UI layer.",
+    evidence: ["Responsive project layouts", "Keyboard-visible interaction states"],
+    icon: "assets/tech/css3.svg",
+  },
+  dotnet: {
+    group: "Services",
+    name: ".NET",
+    copy: "A structured API layer for authenticated movie and theatre management workflows.",
+    evidence: ["ASP.NET Core API", "Azure-ready service configuration"],
+    icon: "assets/tech/dotnet.svg",
+  },
+  csharp: {
+    group: "Services",
+    name: "C#",
+    copy: "Application logic across web services and real-time Unity gameplay systems.",
+    evidence: ["Movies Management backend", "Networked Unity client features"],
+    icon: "assets/tech/csharp.svg",
+  },
+  node: {
+    group: "Services",
+    name: "Node.js",
+    copy: "REST service behaviour with validation, lifecycle rules, persistence, and centralised errors.",
+    evidence: ["User & Terms API", "Critical integration flows"],
+    icon: "assets/tech/nodejs.svg",
+  },
+  java: {
+    group: "Services",
+    name: "Java",
+    copy: "Object-oriented service logic with tests around classification and core behaviour.",
+    evidence: ["Java service logic", "Unit-tested behaviour"],
+    icon: "assets/tech/java.svg",
+  },
+  python: {
+    group: "Data",
+    name: "Python",
+    copy: "Data extraction and reconciliation pipelines that turn inconsistent sources into usable application data.",
+    evidence: ["NewStart NZ mapping layer", "SkillPath source extraction"],
+    icon: "assets/tech/python.svg",
+  },
+  postgresql: {
+    group: "Data",
+    name: "PostgreSQL",
+    copy: "Relational persistence for users, lifecycle state, and versioned terms acceptance.",
+    evidence: ["User & Terms data model", "Integration-tested persistence"],
+    icon: "assets/tech/postgresql.svg",
+  },
+  prisma: {
+    group: "Data",
+    name: "Prisma",
+    copy: "Typed persistence boundaries and migrations for explicit user and terms rules.",
+    evidence: ["Soft-delete email reuse", "Versioned terms records"],
+    icon: "assets/tech/prisma.svg",
+  },
+  sqlserver: {
+    group: "Data",
+    name: "SQL Server",
+    copy: "Relational storage behind movie, theatre, user, and role-aware management flows.",
+    evidence: ["EF Core persistence", "Movies Management data"],
+    icon: "assets/tech/sqlserver.svg",
+  },
+  aws: {
+    group: "Cloud + quality",
+    name: "AWS",
+    copy: "Cloud image analysis and encrypted object storage used as backend building blocks.",
+    evidence: ["AWS Certified Cloud Practitioner", "Rekognition and S3"],
+    icon: "assets/tech/aws.svg",
+  },
+  azure: {
+    group: "Cloud + quality",
+    name: "Azure",
+    copy: "Deployment configuration for a full-stack React and ASP.NET Core application.",
+    evidence: ["Frontend deployment setup", "API and SQL configuration"],
+    icon: "assets/tech/azure.svg",
+  },
+  git: {
+    group: "Cloud + quality",
+    name: "Git",
+    copy: "Versioned delivery across the public projects, data changes, tests, and deployment configuration.",
+    evidence: ["Reviewable project history", "GitHub Pages delivery"],
+    icon: "assets/tech/git.svg",
+  },
+  vitest: {
+    group: "Cloud + quality",
+    name: "Vitest",
+    copy: "Fast integration coverage for the API behaviour most likely to break user lifecycle rules.",
+    evidence: ["User creation and deletion", "Terms acceptance flows"],
+    icon: "assets/tech/vitest.svg",
+  },
+};
+
+const toolButtons = [...document.querySelectorAll("[data-tech]")];
+const toolPreviewIcon = document.querySelector("[data-tech-preview-icon]");
+const toolPreviewLabel = document.querySelector("[data-tech-preview-label]");
+const toolPreviewTitle = document.querySelector("[data-tech-preview-title]");
+const toolPreviewCopy = document.querySelector("[data-tech-preview-copy]");
+const toolPreviewEvidence = document.querySelector("[data-tech-preview-evidence]");
+
+toolButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const content = toolContent[button.dataset.tech];
+    if (!content) return;
+
+    toolButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    toolPreviewIcon.src = content.icon;
+    toolPreviewLabel.textContent = `Active tool · ${content.group}`;
+    toolPreviewTitle.textContent = content.name;
+    toolPreviewCopy.textContent = content.copy;
+    toolPreviewEvidence.replaceChildren(
+      ...content.evidence.map((entry) => {
+        const item = document.createElement("li");
+        item.textContent = entry;
+        return item;
+      }),
+    );
+  });
+});
+
 const projectDetails = {
   newstart: {
     kicker: "Civic data · Geospatial reconciliation",
@@ -240,7 +382,7 @@ const projectDetails = {
   skillpath: {
     kicker: "Learning product · React application",
     title: "SkillPath",
-    lead: "A study experience that supports different certification tracks without duplicating the learning engine.",
+    lead: "A study product that supports different certification tracks without duplicating the learning engine.",
     problem: "Multiple question structures, review states, and certification progress need to share one consistent interface.",
     engineering: "Reusable renderers handle seven question formats while state stays scoped by certification. A Python pipeline normalises source material.",
     evidence: ["Seven question formats", "Timed exam and review flows", "Runnable sample data"],

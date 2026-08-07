@@ -53,7 +53,6 @@
         <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-menu>
           <a href="#work">Work</a>
           <a href="#process">Method</a>
-          <a href="#experience">Experience</a>
           <a href="#skills">Skills</a>
           <a href="#notes">Notes</a>
           <button class="nav-command" type="button" data-command-open>
@@ -289,78 +288,102 @@
         </div>
       </section>
 
-      <section class="experience-section" id="experience" aria-labelledby="experience-title">
-        <div class="page-shell experience-grid">
-          <div class="experience-intro">
-            <p class="section-kicker">Experience</p>
-            <h2 id="experience-title">Learning domains, defining boundaries, shipping behaviour.</h2>
-            <p>
-              My background moves from real-time game clients to cloud-backed content analysis and
-              full-stack web applications.
-            </p>
-          </div>
-
-          <ol class="timeline">
-            <li>
-              <div class="timeline-date">Nov 2024 – Feb 2025</div>
-              <div class="timeline-copy">
-                <h3>Backend Developer Intern</h3>
-                <p class="timeline-place">Auckland ICT Graduate School · Auckland</p>
-                <p>
-                  Developed backend services for an Android app that identified ads in social media
-                  content. Built Java classification logic, integrated AWS Rekognition and encrypted
-                  S3 metadata storage, and added unit tests for core and cloud behaviour.
-                </p>
-              </div>
-            </li>
-            <li>
-              <div class="timeline-date">Jun 2022 – Aug 2022</div>
-              <div class="timeline-copy">
-                <h3>Game Developer Intern</h3>
-                <p class="timeline-place">E-Surfing Comic · Xiamen</p>
-                <p>
-                  Built Unity and C# client features for an online archery FPS, including PvP and
-                  PvE modes, real-time networking with Mirror, shooting, posture, and health systems.
-                </p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
       <section class="skills-section" id="skills" aria-labelledby="skills-title">
-        <div class="page-shell skills-grid">
-          <div class="about-copy">
-            <p class="section-kicker">Capabilities</p>
-            <h2 id="skills-title">A practical full-stack perspective.</h2>
-            <p>
-              I completed a Master of Information Technology at the University of Auckland after a
-              Digital Media Technology degree at Xiamen University. Select a capability to see where
-              I have applied it.
-            </p>
-            <div class="education-list" aria-label="Education">
-              <div><span>2024 – 2025</span><strong>Master of Information Technology</strong><p>University of Auckland</p></div>
-              <div><span>2019 – 2023</span><strong>B.Eng. in Digital Media Technology</strong><p>Xiamen University</p></div>
+        <div class="page-shell">
+          <div class="skills-grid">
+            <div class="about-copy">
+              <p class="section-kicker">Capabilities</p>
+              <h2 id="skills-title">A practical full-stack perspective.</h2>
+              <p>
+                I completed a Master of Information Technology at the University of Auckland after a
+                Digital Media Technology degree at Xiamen University. Select a capability or tool to
+                see where I have applied it.
+              </p>
+              <div class="education-list" aria-label="Education">
+                <div><span>2024 – 2025</span><strong>Master of Information Technology</strong><p>University of Auckland</p></div>
+                <div><span>2019 – 2023</span><strong>B.Eng. in Digital Media Technology</strong><p>Xiamen University</p></div>
+              </div>
+            </div>
+
+            <div class="skill-explorer">
+              <div class="skill-options" role="list" aria-label="Technical capabilities">
+                <button type="button" aria-pressed="true" data-skill="frontend">Frontend</button>
+                <button type="button" aria-pressed="false" data-skill="backend">Backend</button>
+                <button type="button" aria-pressed="false" data-skill="data">Data</button>
+                <button type="button" aria-pressed="false" data-skill="cloud">Cloud</button>
+                <button type="button" aria-pressed="false" data-skill="quality">Quality</button>
+              </div>
+              <div class="skill-panel" id="skill-detail" aria-live="polite">
+                <p data-skill-label>Frontend</p>
+                <h3 data-skill-title>Interfaces that make complex workflows understandable.</h3>
+                <p data-skill-copy>React, TypeScript, semantic HTML, responsive CSS, and Leaflet.</p>
+                <ul data-skill-evidence><li>SkillPath multi-format question engine</li><li>NewStart NZ interactive suburb map</li></ul>
+              </div>
+              <div class="credential-row">
+                <span>AWS Certified Cloud Practitioner</span>
+                <span>Microsoft Certified: Azure Fundamentals</span>
+              </div>
             </div>
           </div>
 
-          <div class="skill-explorer">
-            <div class="skill-options" role="list" aria-label="Technical capabilities">
-              <button type="button" aria-pressed="true" data-skill="frontend">Frontend</button>
-              <button type="button" aria-pressed="false" data-skill="backend">Backend</button>
-              <button type="button" aria-pressed="false" data-skill="data">Data</button>
-              <button type="button" aria-pressed="false" data-skill="cloud">Cloud</button>
-              <button type="button" aria-pressed="false" data-skill="quality">Quality</button>
+          <div class="tech-showcase" aria-labelledby="tools-title">
+            <div class="tech-showcase-heading">
+              <h3 id="tools-title">Tools in the work</h3>
+              <p>Choose a technology to connect it to a project or production decision.</p>
             </div>
-            <div class="skill-panel" aria-live="polite">
-              <p data-skill-label>Frontend</p>
-              <h3 data-skill-title>Interfaces that make complex workflows understandable.</h3>
-              <p data-skill-copy>React, TypeScript, semantic HTML, responsive CSS, and Leaflet.</p>
-              <ul data-skill-evidence><li>SkillPath multi-format question engine</li><li>NewStart NZ interactive suburb map</li></ul>
+
+            <div class="tech-active" aria-live="polite">
+              <div class="tech-active-visual">
+                <img data-tech-preview-icon src="assets/tech/react.svg" alt="" aria-hidden="true" width="96" height="96" />
+              </div>
+              <div class="tech-active-copy">
+                <p data-tech-preview-label>Active tool · Interface</p>
+                <h4 data-tech-preview-title>React</h4>
+                <p data-tech-preview-copy>Reusable interfaces for learning, management, filtering, and review workflows.</p>
+                <ul data-tech-preview-evidence><li>SkillPath question engine</li><li>Movies Management frontend</li></ul>
+              </div>
             </div>
-            <div class="credential-row">
-              <span>AWS Certified Cloud Practitioner</span>
-              <span>Microsoft Certified: Azure Fundamentals</span>
+
+            <div class="tech-groups">
+              <section class="tech-group" aria-labelledby="interface-tools">
+                <div class="tech-group-heading"><h4 id="interface-tools">Interface</h4><span>04</span></div>
+                <div class="tech-icon-list">
+                  <button type="button" data-tech="react" aria-pressed="true" aria-controls="skill-detail"><img src="assets/tech/react.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>React</span><small>SkillPath</small></button>
+                  <button type="button" data-tech="typescript" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/typescript.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>TypeScript</span><small>Three projects</small></button>
+                  <button type="button" data-tech="html" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/html5.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>HTML5</span><small>NewStart NZ</small></button>
+                  <button type="button" data-tech="css" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/css3.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>CSS3</span><small>Responsive UI</small></button>
+                </div>
+              </section>
+
+              <section class="tech-group" aria-labelledby="service-tools">
+                <div class="tech-group-heading"><h4 id="service-tools">Services</h4><span>04</span></div>
+                <div class="tech-icon-list">
+                  <button type="button" data-tech="dotnet" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/dotnet.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>.NET</span><small>Movies API</small></button>
+                  <button type="button" data-tech="csharp" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/csharp.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>C#</span><small>Web + Unity</small></button>
+                  <button type="button" data-tech="node" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/nodejs.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>Node.js</span><small>User API</small></button>
+                  <button type="button" data-tech="java" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/java.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>Java</span><small>Service logic</small></button>
+                </div>
+              </section>
+
+              <section class="tech-group" aria-labelledby="data-tools">
+                <div class="tech-group-heading"><h4 id="data-tools">Data</h4><span>04</span></div>
+                <div class="tech-icon-list">
+                  <button type="button" data-tech="python" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/python.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>Python</span><small>Data pipeline</small></button>
+                  <button type="button" data-tech="postgresql" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/postgresql.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>PostgreSQL</span><small>User API</small></button>
+                  <button type="button" data-tech="prisma" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/prisma.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>Prisma</span><small>Persistence</small></button>
+                  <button type="button" data-tech="sqlserver" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/sqlserver.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>SQL Server</span><small>Movies data</small></button>
+                </div>
+              </section>
+
+              <section class="tech-group" aria-labelledby="delivery-tools">
+                <div class="tech-group-heading"><h4 id="delivery-tools">Cloud + quality</h4><span>04</span></div>
+                <div class="tech-icon-list">
+                  <button type="button" data-tech="aws" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/aws.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>AWS</span><small>Cloud service</small></button>
+                  <button type="button" data-tech="azure" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/azure.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>Azure</span><small>Deployment</small></button>
+                  <button type="button" data-tech="git" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/git.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>Git</span><small>Version control</small></button>
+                  <button type="button" data-tech="vitest" aria-pressed="false" aria-controls="skill-detail"><img src="assets/tech/vitest.svg" alt="" aria-hidden="true" loading="lazy" width="52" height="52" /><span>Vitest</span><small>Integration tests</small></button>
+                </div>
+              </section>
             </div>
           </div>
         </div>
@@ -452,7 +475,7 @@
           <a href="#process" data-command-item data-search="method process thinking"><span>Method</span><small>How I approach a build</small></a>
           <a href="#skills" data-command-item data-search="skills capabilities technologies"><span>Skills</span><small>Capabilities with evidence</small></a>
           <a href="#notes" data-command-item data-search="notes writing decisions"><span>Notes</span><small>Engineering decisions</small></a>
-          <a href="assets/Disi_Pan_CV.pdf" target="_blank" data-command-item data-search="cv resume experience education"><span>CV</span><small>Open the full PDF</small></a>
+          <a href="assets/Disi_Pan_CV.pdf" target="_blank" data-command-item data-search="cv resume education"><span>CV</span><small>Open the full PDF</small></a>
           <a href="mailto:pandisi868@gmail.com" data-command-item data-search="email contact hire"><span>Email</span><small>pandisi868@gmail.com</small></a>
         </div>
         <p class="command-empty" hidden data-command-empty>No matching destination.</p>
