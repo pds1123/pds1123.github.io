@@ -507,16 +507,8 @@ a {
   border-top: 1px solid var(--line);
 }
 
-.stack-proof > span {
-  color: var(--primary-deep);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 750;
-  text-transform: uppercase;
-}
-
 .stack-proof p {
-  margin: 7px 0 8px;
+  margin: 0 0 8px;
   color: var(--ink-soft);
   font-size: 14px;
 }
@@ -549,6 +541,26 @@ a {
   font-weight: 750;
   letter-spacing: 0.025em;
   text-transform: uppercase;
+}
+
+.project-context,
+.project-index {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.project-context::before,
+.project-index::before,
+.dialog-topline span::before {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--primary-deep);
+  content: "";
 }
 
 .work-section,
@@ -1014,26 +1026,16 @@ a {
   background: var(--surface);
 }
 
-.process-panel > p:first-child,
-.skill-panel > p:first-child {
-  margin: 0;
-  color: var(--primary-deep);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 750;
-  text-transform: uppercase;
-}
-
 .process-panel h3,
 .skill-panel h3 {
-  margin: 18px 0 0;
+  margin: 0;
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   letter-spacing: -0.025em;
   line-height: 1.08;
 }
 
-.process-panel > p:nth-of-type(2),
-.skill-panel > p:nth-of-type(2) {
+.process-panel > [data-process-copy],
+.skill-panel > [data-skill-copy] {
   margin: 22px 0 0;
   color: var(--ink-soft);
 }
@@ -1196,23 +1198,14 @@ a {
   justify-content: center;
 }
 
-.tech-active-copy > p:first-child {
-  margin: 0;
-  color: var(--primary-deep);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 750;
-  text-transform: uppercase;
-}
-
 .tech-active-copy h4 {
-  margin: 8px 0 0;
+  margin: 0;
   font-size: clamp(2.2rem, 4vw, 3.8rem);
   letter-spacing: -0.035em;
   line-height: 1;
 }
 
-.tech-active-copy > p:nth-of-type(2) {
+.tech-active-copy > [data-tech-preview-copy] {
   max-width: 60ch;
   margin: 15px 0 0;
   color: var(--ink-soft);
@@ -1376,17 +1369,8 @@ a {
   background: var(--primary-light);
 }
 
-.notes-list article p {
-  margin: 0;
-  color: var(--primary-deep);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 750;
-  text-transform: uppercase;
-}
-
 .notes-list h3 {
-  margin: 28px 0 0;
+  margin: 0;
   font-size: clamp(1.45rem, 2.2vw, 2rem);
   letter-spacing: -0.02em;
   line-height: 1.16;
@@ -1499,14 +1483,17 @@ a {
   background: var(--surface);
 }
 
-.dialog-topline span,
-.command-heading p {
+.dialog-topline span {
+  display: flex;
   margin: 0;
+  align-items: center;
+  gap: 8px;
   color: var(--primary-deep);
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 750;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .dialog-topline button,
@@ -1554,17 +1541,9 @@ a {
   border-bottom: 1px solid var(--line);
 }
 
-.dialog-grid h3 {
-  margin: 0;
-  color: var(--primary-deep);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-}
-
 .dialog-grid p,
 .dialog-grid ul {
-  margin: 16px 0 0;
+  margin: 0;
   color: var(--ink-soft);
   font-size: 15px;
 }
@@ -1582,7 +1561,7 @@ a {
 }
 
 .command-heading h2 {
-  margin: 4px 0 0;
+  margin: 0;
   font-size: 24px;
   letter-spacing: -0.02em;
 }

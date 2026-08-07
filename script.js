@@ -67,24 +67,20 @@ if ("IntersectionObserver" in window && sections.length) {
 
 const stackContent = {
   interface: {
-    kicker: "Interface evidence",
     copy: "Reusable React flows, responsive layouts, map interactions, and accessible controls.",
     link: "See SkillPath and NewStart NZ",
   },
   services: {
-    kicker: "Service evidence",
     copy: "REST endpoints, authentication, validation, error boundaries, and role-aware application behaviour.",
     link: "See Movies Management and User API",
   },
   data: {
-    kicker: "Data and cloud evidence",
     copy: "Relational persistence, source reconciliation, encrypted storage, and Azure and AWS integrations.",
     link: "See NewStart NZ and Movies Management",
   },
 };
 
 const stackTabs = [...document.querySelectorAll("[data-stack-tab]")];
-const stackKicker = document.querySelector("[data-stack-kicker]");
 const stackCopy = document.querySelector("[data-stack-copy]");
 const stackLink = document.querySelector("[data-stack-link]");
 
@@ -94,7 +90,6 @@ stackTabs.forEach((tab) => {
     const content = stackContent[key];
     if (!content) return;
     stackTabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
-    stackKicker.textContent = content.kicker;
     stackCopy.textContent = content.copy;
     stackLink.textContent = content.link;
   });
@@ -124,25 +119,21 @@ filterButtons.forEach((button) => {
 
 const processContent = {
   frame: {
-    kicker: "Start with the decision",
     title: "Frame the user, constraint, and useful outcome.",
     copy: "I separate the real user question from the first technical solution. In NewStart NZ, that meant starting with ‘where can I afford to live safely?’ rather than ‘build a map.’",
     evidence: "Evidence: requirements, source audit, explicit scope",
   },
   model: {
-    kicker: "Make boundaries explicit",
     title: "Model the data and system edges before the screen.",
     copy: "I identify where names, identifiers, ownership, and lifecycle rules disagree. This exposes the reconciliation layer, persistence model, and API contracts that the interface depends on.",
     evidence: "Evidence: 556 + 416 source regions mapped to 63 suburbs",
   },
   build: {
-    kicker: "Deliver a complete path",
     title: "Build the smallest end-to-end flow that proves the model.",
     copy: "I connect interface, service, persistence, and deployment concerns early. That keeps design choices grounded in behaviour rather than isolated component work.",
     evidence: "Evidence: runnable public projects with sample data",
   },
   verify: {
-    kicker: "Protect critical behaviour",
     title: "Test the risky paths and expose the gaps.",
     copy: "I test authentication, validation, persistence, cloud boundaries, and edge cases. Missing source coverage stays labelled instead of being silently replaced with a convenient value.",
     evidence: "Evidence: unit and integration tests, explicit coverage reporting",
@@ -150,7 +141,6 @@ const processContent = {
 };
 
 const processTabs = [...document.querySelectorAll("[data-process-tab]")];
-const processKicker = document.querySelector("[data-process-kicker]");
 const processTitle = document.querySelector("[data-process-title]");
 const processCopy = document.querySelector("[data-process-copy]");
 const processEvidence = document.querySelector("[data-process-evidence]");
@@ -160,7 +150,6 @@ processTabs.forEach((tab) => {
     const content = processContent[tab.dataset.processTab];
     if (!content) return;
     processTabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
-    processKicker.textContent = content.kicker;
     processTitle.textContent = content.title;
     processCopy.textContent = content.copy;
     processEvidence.textContent = content.evidence;
@@ -169,31 +158,26 @@ processTabs.forEach((tab) => {
 
 const skillContent = {
   frontend: {
-    label: "Frontend",
     title: "Interfaces that make complex workflows understandable.",
     copy: "React, TypeScript, semantic HTML, responsive CSS, and Leaflet.",
     evidence: ["SkillPath multi-format question engine", "NewStart NZ interactive suburb map"],
   },
   backend: {
-    label: "Backend",
     title: "Services with clear contracts and lifecycle rules.",
     copy: "ASP.NET Core, Node.js, Express, REST APIs, authentication, and validation.",
     evidence: ["Movies Management role-based API", "User and Terms versioning flows"],
   },
   data: {
-    label: "Data",
     title: "Models that preserve meaning across system boundaries.",
     copy: "PostgreSQL, SQL Server, Prisma, EF Core, Pandas, and source reconciliation.",
     evidence: ["NewStart NZ geographic mapping layer", "Soft-delete email reuse constraints"],
   },
   cloud: {
-    label: "Cloud",
     title: "Cloud services used as part of a working product path.",
     copy: "Azure deployment configuration, AWS Rekognition, S3, and encrypted metadata storage.",
     evidence: ["Azure-ready movie management application", "AWS service integration and encrypted storage"],
   },
   quality: {
-    label: "Quality",
     title: "Tests focused on behaviour that would be costly to break.",
     copy: "Vitest, Supertest, unit testing, integration testing, and explicit error handling.",
     evidence: ["Critical User API integration flows", "Unit-tested Java and cloud behaviour"],
@@ -201,7 +185,6 @@ const skillContent = {
 };
 
 const skillButtons = [...document.querySelectorAll("[data-skill]")];
-const skillLabel = document.querySelector("[data-skill-label]");
 const skillTitle = document.querySelector("[data-skill-title]");
 const skillCopy = document.querySelector("[data-skill-copy]");
 const skillEvidence = document.querySelector("[data-skill-evidence]");
@@ -211,7 +194,6 @@ skillButtons.forEach((button) => {
     const content = skillContent[button.dataset.skill];
     if (!content) return;
     skillButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-    skillLabel.textContent = content.label;
     skillTitle.textContent = content.title;
     skillCopy.textContent = content.copy;
     skillEvidence.replaceChildren(
@@ -341,7 +323,6 @@ const toolContent = {
 
 const toolButtons = [...document.querySelectorAll("[data-tech]")];
 const toolPreviewIcon = document.querySelector("[data-tech-preview-icon]");
-const toolPreviewLabel = document.querySelector("[data-tech-preview-label]");
 const toolPreviewTitle = document.querySelector("[data-tech-preview-title]");
 const toolPreviewCopy = document.querySelector("[data-tech-preview-copy]");
 const toolPreviewEvidence = document.querySelector("[data-tech-preview-evidence]");
@@ -353,7 +334,6 @@ toolButtons.forEach((button) => {
 
     toolButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
     toolPreviewIcon.src = content.icon;
-    toolPreviewLabel.textContent = `Active tool · ${content.group}`;
     toolPreviewTitle.textContent = content.name;
     toolPreviewCopy.textContent = content.copy;
     toolPreviewEvidence.replaceChildren(
