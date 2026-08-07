@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DP">
+  <style>
+    .bg { fill: oklch(0.72 0.15 80); }
+    .text { fill: oklch(0.19 0.035 245); font: 700 20px ui-monospace, monospace; }
+  </style>
+  <rect class="bg" width="64" height="64" rx="10" />
+  <text class="text" x="32" y="39" text-anchor="middle">DP</text>
+</svg>
