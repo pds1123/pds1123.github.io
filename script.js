@@ -335,7 +335,7 @@ toolButtons.forEach((button) => {
 
     toolButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
     toolPreviewIcon.dataset.tech = button.dataset.tech;
-    toolPreviewUse.setAttribute("href", `assets/tech/icons.svg#${content.icon}`);
+    toolPreviewUse.setAttribute("href", `#${content.icon}`);
     toolPreviewTitle.textContent = content.name;
     toolPreviewCopy.textContent = content.copy;
     toolPreviewEvidence.replaceChildren(
