@@ -1207,7 +1207,7 @@ a {
   align-items: end;
 }
 
-.tech-showcase-heading h3 {
+.tech-showcase-heading h2 {
   max-width: 620px;
   margin: 0;
   font-size: clamp(2.6rem, 5vw, 4.8rem);
