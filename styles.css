@@ -1627,6 +1627,28 @@ a {
   font-size: 19px;
 }
 
+.dialog-visual {
+  display: grid;
+  margin: 32px 0 0;
+  padding: clamp(12px, 2vw, 20px);
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--accent-light);
+  overflow: hidden;
+}
+
+.dialog-visual[data-variant="illustration"] {
+  background: var(--primary-light);
+}
+
+.dialog-visual img {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: contain;
+}
+
 .dialog-grid {
   display: grid;
   margin: 42px 0;

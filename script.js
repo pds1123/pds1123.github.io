@@ -358,6 +358,15 @@ const projectDetails = {
     evidence: ["59 suburbs with rent data", "61 suburbs with crime data", "Missing coverage remains visible"],
     stack: "Python · MBIE Market Rent API v2 · NZ Police data · Leaflet · HTML",
     href: "https://github.com/pds1123/newstart-nz",
+    visual: {
+      src: "assets/newstart-nz-preview.webp",
+      srcset: "assets/newstart-nz-preview.webp 562w, assets/newstart-nz-preview@2x.webp 1124w",
+      sizes: "(max-width: 680px) calc(100vw - 96px), 700px",
+      alt: "NewStart NZ interface showing rent filters beside a map of Auckland suburbs",
+      width: 562,
+      height: 484,
+      variant: "interface",
+    },
   },
   skillpath: {
     kicker: "Learning product · React application",
@@ -368,6 +377,15 @@ const projectDetails = {
     evidence: ["Seven question formats", "Timed exam and review flows", "Runnable sample data"],
     stack: "React 19 · TypeScript · Vite · Tailwind CSS · Python",
     href: "https://github.com/pds1123/skillpath",
+    visual: {
+      src: "assets/skillpath-hero.webp",
+      srcset: "assets/skillpath-hero.webp 300w, assets/skillpath-hero@2x.webp 600w",
+      sizes: "(max-width: 680px) calc(100vw - 96px), 360px",
+      alt: "SkillPath purple layered learning-path illustration",
+      width: 300,
+      height: 316,
+      variant: "illustration",
+    },
   },
   movies: {
     kicker: "Full stack · Role-aware management",
@@ -397,6 +415,8 @@ const projectClose = document.querySelector("[data-project-close]");
 const projectDialogKicker = document.querySelector("[data-project-dialog-kicker]");
 const projectDialogTitle = document.querySelector("[data-project-dialog-title]");
 const projectDialogLead = document.querySelector("[data-project-dialog-lead]");
+const projectDialogVisual = document.querySelector("[data-project-dialog-visual]");
+const projectDialogImage = document.querySelector("[data-project-dialog-image]");
 const projectDialogProblem = document.querySelector("[data-project-dialog-problem]");
 const projectDialogEngineering = document.querySelector("[data-project-dialog-engineering]");
 const projectDialogEvidence = document.querySelector("[data-project-dialog-evidence]");
@@ -414,6 +434,27 @@ projectOpeners.forEach((button) => {
     projectDialogEngineering.textContent = project.engineering;
     projectDialogStack.textContent = project.stack;
     projectDialogLink.href = project.href;
+
+    if (project.visual) {
+      projectDialogVisual.hidden = false;
+      projectDialogVisual.dataset.variant = project.visual.variant;
+      projectDialogImage.src = project.visual.src;
+      projectDialogImage.srcset = project.visual.srcset;
+      projectDialogImage.sizes = project.visual.sizes;
+      projectDialogImage.alt = project.visual.alt;
+      projectDialogImage.width = project.visual.width;
+      projectDialogImage.height = project.visual.height;
+    } else {
+      projectDialogVisual.hidden = true;
+      projectDialogVisual.removeAttribute("data-variant");
+      projectDialogImage.removeAttribute("src");
+      projectDialogImage.removeAttribute("srcset");
+      projectDialogImage.removeAttribute("sizes");
+      projectDialogImage.removeAttribute("width");
+      projectDialogImage.removeAttribute("height");
+      projectDialogImage.alt = "";
+    }
+
     projectDialogEvidence.replaceChildren(
       ...project.evidence.map((entry) => {
         const item = document.createElement("li");
