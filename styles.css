@@ -1552,6 +1552,13 @@ a {
   backdrop-filter: blur(3px);
 }
 
+.project-dialog[open] {
+  display: grid;
+  height: min(820px, calc(100dvh - 32px));
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+
 .dialog-topline,
 .command-heading {
   display: flex;
@@ -1589,6 +1596,21 @@ a {
 
 .dialog-body {
   padding: clamp(28px, 5vw, 56px);
+}
+
+.project-dialog .dialog-body {
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.dialog-actions {
+  display: flex;
+  min-height: 80px;
+  padding: 15px clamp(28px, 5vw, 56px);
+  align-items: center;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
 }
 
 .dialog-body > h2 {
@@ -2055,6 +2077,10 @@ a {
 
   .dialog-grid > div {
     min-height: 0;
+  }
+
+  .dialog-actions .button {
+    width: 100%;
   }
 
   .command-results a {
