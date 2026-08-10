@@ -361,6 +361,7 @@ a {
 .hero h1 {
   max-width: 820px;
   font-size: clamp(3.2rem, 6.2vw, 5.75rem);
+  letter-spacing: -0.025em;
 }
 
 .hero-intro {
