@@ -1923,6 +1923,10 @@ a {
     padding-top: 54px;
   }
 
+  .hero::before {
+    display: none;
+  }
+
   .hero h1 {
     font-size: clamp(3rem, 15vw, 4.7rem);
   }
