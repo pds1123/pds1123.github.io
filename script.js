@@ -25,25 +25,6 @@ window.addEventListener("resize", () => {
   if (window.innerWidth > 820) closeMenu();
 });
 
-const scrollProgress = document.querySelector("[data-scroll-progress]");
-let scrollFrame = 0;
-
-const updateScrollState = () => {
-  const distance = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = distance > 0 ? Math.min(window.scrollY / distance, 1) : 0;
-  if (scrollProgress) scrollProgress.style.width = `${progress * 100}%`;
-  scrollFrame = 0;
-};
-
-const requestScrollUpdate = () => {
-  if (scrollFrame) return;
-  scrollFrame = window.requestAnimationFrame(updateScrollState);
-};
-
-updateScrollState();
-window.addEventListener("scroll", requestScrollUpdate, { passive: true });
-window.addEventListener("resize", requestScrollUpdate);
-
 if ("IntersectionObserver" in window && sections.length) {
   const sectionObserver = new IntersectionObserver(
     (entries) => {
@@ -59,350 +40,66 @@ if ("IntersectionObserver" in window && sections.length) {
         else link.removeAttribute("aria-current");
       });
     },
-    { rootMargin: "-18% 0px -64%", threshold: [0.05, 0.25, 0.5] },
+    { rootMargin: "-20% 0px -64%", threshold: [0.05, 0.25, 0.5] },
   );
 
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
-const stackContent = {
-  interface: {
-    copy: "Reusable React flows, responsive layouts, map interactions, and accessible controls.",
-    link: "See SkillPath and NewStart NZ",
-  },
-  services: {
-    copy: "REST endpoints, authentication, validation, error boundaries, and role-aware application behaviour.",
-    link: "See Movies Management",
-  },
-  data: {
-    copy: "Relational persistence, source reconciliation, encrypted storage, and Azure and AWS integrations.",
-    link: "See NewStart NZ and Movies Management",
-  },
-};
-
-const stackTabs = [...document.querySelectorAll("[data-stack-tab]")];
-const stackCopy = document.querySelector("[data-stack-copy]");
-const stackLink = document.querySelector("[data-stack-link]");
-
-stackTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const key = tab.dataset.stackTab;
-    const content = stackContent[key];
-    if (!content) return;
-    stackTabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
-    stackCopy.textContent = content.copy;
-    stackLink.textContent = content.link;
-  });
-});
-
-const filterButtons = [...document.querySelectorAll("[data-project-filter]")];
-const projects = [...document.querySelectorAll("[data-project]")];
-const filterEmpty = document.querySelector("[data-filter-empty]");
-
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const filter = button.dataset.projectFilter;
-    let visibleCount = 0;
-
-    filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-    projects.forEach((project) => {
-      const categories = project.dataset.category.split(" ");
-      const isVisible = filter === "all" || categories.includes(filter);
-      project.classList.toggle("is-filtered", !isVisible);
-      if (isVisible) visibleCount += 1;
-    });
-
-    if (filterEmpty) filterEmpty.hidden = visibleCount !== 0;
-    requestScrollUpdate();
-  });
-});
-
-const processContent = {
-  frame: {
-    title: "Frame the user, constraint, and useful outcome.",
-    copy: "I separate the real user question from the first technical solution. In NewStart NZ, that meant starting with ‘where can I afford to live safely?’ rather than ‘build a map.’",
-    evidence: "Evidence: requirements, source audit, explicit scope",
-  },
-  model: {
-    title: "Model the data and system edges before the screen.",
-    copy: "I identify where names, identifiers, ownership, and lifecycle rules disagree. This exposes the reconciliation layer, persistence model, and API contracts that the interface depends on.",
-    evidence: "Evidence: 556 + 416 source regions mapped to 63 suburbs",
-  },
-  build: {
-    title: "Build the smallest end-to-end flow that proves the model.",
-    copy: "I connect interface, service, persistence, and deployment concerns early. That keeps design choices grounded in behaviour rather than isolated component work.",
-    evidence: "Evidence: runnable public projects with sample data",
-  },
-  verify: {
-    title: "Test the risky paths and expose the gaps.",
-    copy: "I test authentication, validation, persistence, cloud boundaries, and edge cases. Missing source coverage stays labelled instead of being silently replaced with a convenient value.",
-    evidence: "Evidence: unit and integration tests, explicit coverage reporting",
-  },
-};
-
-const processTabs = [...document.querySelectorAll("[data-process-tab]")];
-const processTitle = document.querySelector("[data-process-title]");
-const processCopy = document.querySelector("[data-process-copy]");
-const processEvidence = document.querySelector("[data-process-evidence]");
-
-processTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const content = processContent[tab.dataset.processTab];
-    if (!content) return;
-    processTabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
-    processTitle.textContent = content.title;
-    processCopy.textContent = content.copy;
-    processEvidence.textContent = content.evidence;
-  });
-});
-
-const skillContent = {
-  frontend: {
-    title: "Interfaces that make complex workflows understandable.",
-    copy: "React, TypeScript, semantic HTML, responsive CSS, and Leaflet.",
-    evidence: ["SkillPath multi-format question engine", "NewStart NZ interactive suburb map"],
-  },
-  backend: {
-    title: "Services with clear contracts and lifecycle rules.",
-    copy: "ASP.NET Core, Node.js, Express, REST APIs, authentication, and validation.",
-    evidence: ["Movies Management role-based API"],
-  },
-  data: {
-    title: "Models that preserve meaning across system boundaries.",
-    copy: "PostgreSQL, SQL Server, Prisma, EF Core, Pandas, and source reconciliation.",
-    evidence: ["NewStart NZ geographic mapping layer", "Movies Management relational model"],
-  },
-  cloud: {
-    title: "Cloud services used as part of a working product path.",
-    copy: "Azure deployment configuration, AWS Rekognition, S3, and encrypted metadata storage.",
-    evidence: ["Azure-ready movie management application", "AWS service integration and encrypted storage"],
-  },
-  quality: {
-    title: "Tests focused on behaviour that would be costly to break.",
-    copy: "Vitest, Supertest, unit testing, integration testing, and explicit error handling.",
-    evidence: ["Integration-tested service behaviour", "Unit-tested Java and cloud behaviour"],
-  },
-};
-
-const skillButtons = [...document.querySelectorAll("[data-skill]")];
-const skillTitle = document.querySelector("[data-skill-title]");
-const skillCopy = document.querySelector("[data-skill-copy]");
-const skillEvidence = document.querySelector("[data-skill-evidence]");
-
-skillButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const content = skillContent[button.dataset.skill];
-    if (!content) return;
-    skillButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-    skillTitle.textContent = content.title;
-    skillCopy.textContent = content.copy;
-    skillEvidence.replaceChildren(
-      ...content.evidence.map((entry) => {
-        const item = document.createElement("li");
-        item.textContent = entry;
-        return item;
-      }),
-    );
-  });
-});
-
-const toolContent = {
-  react: {
-    group: "Interface",
-    name: "React",
-    copy: "Reusable interfaces for learning, management, filtering, and review workflows.",
-    evidence: ["SkillPath question engine", "Movies Management frontend"],
-    icon: "tech-react",
-  },
-  typescript: {
-    group: "Interface",
-    name: "TypeScript",
-    copy: "Typed application boundaries across reusable client components and REST service code.",
-    evidence: ["SkillPath application state"],
-    icon: "tech-typescript",
-  },
-  html: {
-    group: "Interface",
-    name: "HTML5",
-    copy: "Semantic, zero-build interfaces that stay portable and easy to deploy.",
-    evidence: ["NewStart NZ map", "This portfolio"],
-    icon: "tech-html",
-  },
-  css: {
-    group: "Interface",
-    name: "CSS3",
-    copy: "Responsive layouts, accessible states, and purposeful interface motion without a heavy UI layer.",
-    evidence: ["Responsive project layouts", "Keyboard-visible interaction states"],
-    icon: "tech-css",
-  },
-  dotnet: {
-    group: "Services",
-    name: ".NET",
-    copy: "A structured API layer for authenticated movie and theatre management workflows.",
-    evidence: ["ASP.NET Core API", "Azure-ready service configuration"],
-    icon: "tech-dotnet",
-  },
-  csharp: {
-    group: "Services",
-    name: "C#",
-    copy: "Application logic across web services and real-time Unity gameplay systems.",
-    evidence: ["Movies Management backend", "Networked Unity client features"],
-    icon: "tech-csharp",
-  },
-  node: {
-    group: "Services",
-    name: "Node.js",
-    copy: "REST service behaviour with validation, persistence, and centralised errors.",
-    evidence: ["Validation boundaries", "Centralised error handling"],
-    icon: "tech-node",
-  },
-  java: {
-    group: "Services",
-    name: "Java",
-    copy: "Object-oriented service logic with tests around classification and core behaviour.",
-    evidence: ["Java service logic", "Unit-tested behaviour"],
-    icon: "tech-java",
-  },
-  python: {
-    group: "Data",
-    name: "Python",
-    copy: "Data extraction and reconciliation pipelines that turn inconsistent sources into usable application data.",
-    evidence: ["NewStart NZ mapping layer", "SkillPath source extraction"],
-    icon: "tech-python",
-  },
-  postgresql: {
-    group: "Data",
-    name: "PostgreSQL",
-    copy: "Relational persistence with explicit constraints and lifecycle state.",
-    evidence: ["Relational data modelling", "Integration-tested persistence"],
-    icon: "tech-postgresql",
-  },
-  prisma: {
-    group: "Data",
-    name: "Prisma",
-    copy: "Typed persistence boundaries and migrations for explicit data rules.",
-    evidence: ["Schema migrations", "Typed persistence"],
-    icon: "tech-prisma",
-  },
-  sqlserver: {
-    group: "Data",
-    name: "SQL Server",
-    copy: "Relational storage behind movie, theatre, user, and role-aware management flows.",
-    evidence: ["EF Core persistence", "Movies Management data"],
-    icon: "tech-sqlserver",
-  },
-  aws: {
-    group: "Cloud + quality",
-    name: "AWS",
-    copy: "Cloud image analysis and encrypted object storage used as backend building blocks.",
-    evidence: ["AWS Certified Cloud Practitioner", "Rekognition and S3"],
-    icon: "tech-aws",
-  },
-  azure: {
-    group: "Cloud + quality",
-    name: "Azure",
-    copy: "Deployment configuration for a full-stack React and ASP.NET Core application.",
-    evidence: ["Frontend deployment setup", "API and SQL configuration"],
-    icon: "tech-azure",
-  },
-  git: {
-    group: "Cloud + quality",
-    name: "Git",
-    copy: "Versioned delivery across the public projects, data changes, tests, and deployment configuration.",
-    evidence: ["Reviewable project history", "GitHub Pages delivery"],
-    icon: "tech-git",
-  },
-  vitest: {
-    group: "Cloud + quality",
-    name: "Vitest",
-    copy: "Fast integration coverage for the API behaviour most likely to break user lifecycle rules.",
-    evidence: ["User creation and deletion", "Terms acceptance flows"],
-    icon: "tech-vitest",
-  },
-};
-
-const toolButtons = [...document.querySelectorAll("button[data-tech]")];
-const toolPreviewIcon = document.querySelector("[data-tech-preview-icon]");
-const toolPreviewUse = document.querySelector("[data-tech-preview-use]");
-const toolPreviewTitle = document.querySelector("[data-tech-preview-title]");
-const toolPreviewCopy = document.querySelector("[data-tech-preview-copy]");
-const toolPreviewEvidence = document.querySelector("[data-tech-preview-evidence]");
-
-toolButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const content = toolContent[button.dataset.tech];
-    if (!content) return;
-
-    toolButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-    toolPreviewIcon.dataset.tech = button.dataset.tech;
-    toolPreviewUse.setAttribute("href", `#${content.icon}`);
-    toolPreviewTitle.textContent = content.name;
-    toolPreviewCopy.textContent = content.copy;
-    toolPreviewEvidence.replaceChildren(
-      ...content.evidence.map((entry) => {
-        const item = document.createElement("li");
-        item.textContent = entry;
-        return item;
-      }),
-    );
-  });
-});
-
 const projectDetails = {
   newstart: {
-    kicker: "Civic data · Geospatial reconciliation",
     title: "NewStart NZ",
-    lead: "A housing and safety guide for people making an unfamiliar Auckland suburb decision.",
-    problem: "Official rent and police data answer related questions but use incompatible geographic boundaries and naming systems.",
-    engineering: "A reconciliation layer folds 556 rent areas and 416 police areas into 63 suburb names, followed by a zero-build Leaflet interface.",
-    evidence: ["59 suburbs with rent data", "61 suburbs with crime data", "Missing coverage remains visible"],
+    lead: "A housing and safety guide that helps newcomers compare Auckland locations through rent, budget, and crime data.",
+    problem: "People arriving in Auckland need to judge affordability and safety together, but the official answers live in separate datasets and use incompatible geographic boundaries.",
+    engineering: "A reconciliation layer combines 556 rent regions and 416 police regions, then a zero-build Leaflet interface turns the result into one filterable decision view.",
+    evidence: ["Official MBIE rent data", "NZ Police safety data", "Missing coverage remains visible"],
     stack: "Python · MBIE Market Rent API v2 · NZ Police data · Leaflet · HTML",
-    href: "https://github.com/pds1123/newstart-nz",
     visual: {
-      src: "assets/newstart-nz-preview.webp",
-      srcset: "assets/newstart-nz-preview.webp 562w, assets/newstart-nz-preview@2x.webp 1124w",
-      sizes: "(max-width: 680px) calc(100vw - 96px), 700px",
-      alt: "NewStart NZ interface showing rent filters beside a map of Auckland suburbs",
-      width: 562,
-      height: 484,
-      variant: "interface",
+      src: "assets/newstart-nz-preview.webp?v=complete",
+      srcset: "assets/newstart-nz-preview.webp?v=complete 560w, assets/newstart-nz-preview@2x.webp?v=complete 1120w",
+      sizes: "(max-width: 680px) calc(100vw - 72px), 700px",
+      alt: "NewStart NZ interface showing rent and safety filters beside an Auckland map",
+      width: 1120,
+      height: 700,
     },
   },
   skillpath: {
-    kicker: "Learning product · React application",
     title: "SkillPath",
     lead: "A study product that supports different certification tracks without duplicating the learning engine.",
     problem: "Multiple question structures, review states, and certification progress need to share one consistent interface.",
     engineering: "Reusable renderers handle seven question formats while state stays scoped by certification. A Python pipeline normalises source material.",
     evidence: ["Seven question formats", "Timed exam and review flows", "Runnable sample data"],
     stack: "React 19 · TypeScript · Vite · Tailwind CSS · Python",
-    href: "https://github.com/pds1123/skillpath",
     visual: {
-      src: "assets/skillpath-hero.webp",
-      srcset: "assets/skillpath-hero.webp 300w, assets/skillpath-hero@2x.webp 600w",
-      sizes: "(max-width: 680px) calc(100vw - 96px), 360px",
-      alt: "SkillPath purple layered learning-path illustration",
-      width: 300,
-      height: 316,
-      variant: "illustration",
+      src: "assets/skillpath-dashboard-wide.webp?v=horizontal",
+      srcset: "assets/skillpath-dashboard-wide.webp?v=horizontal 560w, assets/skillpath-dashboard-wide@2x.webp?v=horizontal 900w",
+      sizes: "(max-width: 680px) calc(100vw - 72px), 680px",
+      alt: "SkillPath dashboard showing module study, exam simulation, and certification progress",
+      width: 900,
+      height: 506,
     },
   },
   movies: {
-    kicker: "Full stack · Role-aware management",
     title: "Movies Management App",
     lead: "A complete management workflow spanning a React interface, ASP.NET Core API, SQL persistence, and Azure configuration.",
     problem: "Movie and theatre records require different permissions, media handling, locations, and useful browse controls.",
     engineering: "JWT authentication and role checks protect API behaviour; EF Core models persistence while the UI handles uploads, maps, pagination, and filters.",
     evidence: ["Role-based access", "Image and map inputs", "Pagination and filtering"],
     stack: ".NET 9 · React 19 · EF Core · SQL Server · Azure",
-    href: "https://github.com/pds1123/movies-management-app",
+    visual: {
+      src: "assets/movies-management-interface-wide.webp",
+      srcset: "assets/movies-management-interface-wide.webp 560w, assets/movies-management-interface-wide@2x.webp 1120w",
+      sizes: "(max-width: 680px) calc(100vw - 72px), 620px",
+      alt: "FRAME movie listing showing cinema sessions for Past Lives and Burning",
+      width: 1120,
+      height: 630,
+    },
   },
 };
 
 const projectDialog = document.querySelector("[data-project-dialog]");
 const projectOpeners = [...document.querySelectorAll("[data-project-open]")];
 const projectClose = document.querySelector("[data-project-close]");
-const projectDialogKicker = document.querySelector("[data-project-dialog-kicker]");
 const projectDialogTitle = document.querySelector("[data-project-dialog-title]");
 const projectDialogLead = document.querySelector("[data-project-dialog-lead]");
 const projectDialogVisual = document.querySelector("[data-project-dialog-visual]");
@@ -411,39 +108,26 @@ const projectDialogProblem = document.querySelector("[data-project-dialog-proble
 const projectDialogEngineering = document.querySelector("[data-project-dialog-engineering]");
 const projectDialogEvidence = document.querySelector("[data-project-dialog-evidence]");
 const projectDialogStack = document.querySelector("[data-project-dialog-stack]");
-const projectDialogLink = document.querySelector("[data-project-dialog-link]");
+let lastProjectOpener = null;
 
 projectOpeners.forEach((button) => {
   button.addEventListener("click", () => {
     const project = projectDetails[button.dataset.projectOpen];
     if (!project || !projectDialog) return;
-    projectDialogKicker.textContent = project.kicker;
+
+    lastProjectOpener = button;
     projectDialogTitle.textContent = project.title;
     projectDialogLead.textContent = project.lead;
     projectDialogProblem.textContent = project.problem;
     projectDialogEngineering.textContent = project.engineering;
     projectDialogStack.textContent = project.stack;
-    projectDialogLink.href = project.href;
-
-    if (project.visual) {
-      projectDialogVisual.hidden = false;
-      projectDialogVisual.dataset.variant = project.visual.variant;
-      projectDialogImage.src = project.visual.src;
-      projectDialogImage.srcset = project.visual.srcset;
-      projectDialogImage.sizes = project.visual.sizes;
-      projectDialogImage.alt = project.visual.alt;
-      projectDialogImage.width = project.visual.width;
-      projectDialogImage.height = project.visual.height;
-    } else {
-      projectDialogVisual.hidden = true;
-      projectDialogVisual.removeAttribute("data-variant");
-      projectDialogImage.removeAttribute("src");
-      projectDialogImage.removeAttribute("srcset");
-      projectDialogImage.removeAttribute("sizes");
-      projectDialogImage.removeAttribute("width");
-      projectDialogImage.removeAttribute("height");
-      projectDialogImage.alt = "";
-    }
+    projectDialogVisual.hidden = false;
+    projectDialogImage.src = project.visual.src;
+    projectDialogImage.srcset = project.visual.srcset;
+    projectDialogImage.sizes = project.visual.sizes;
+    projectDialogImage.alt = project.visual.alt;
+    projectDialogImage.width = project.visual.width;
+    projectDialogImage.height = project.visual.height;
 
     projectDialogEvidence.replaceChildren(
       ...project.evidence.map((entry) => {
@@ -452,62 +136,22 @@ projectOpeners.forEach((button) => {
         return item;
       }),
     );
+
     projectDialog.showModal();
   });
 });
 
 projectClose?.addEventListener("click", () => projectDialog?.close());
+
 projectDialog?.addEventListener("click", (event) => {
   if (event.target === projectDialog) projectDialog.close();
 });
 
-const commandDialog = document.querySelector("[data-command-dialog]");
-const commandOpeners = [...document.querySelectorAll("[data-command-open]")];
-const commandClose = document.querySelector("[data-command-close]");
-const commandSearch = document.querySelector("[data-command-search]");
-const commandItems = [...document.querySelectorAll("[data-command-item]")];
-const commandEmpty = document.querySelector("[data-command-empty]");
-
-const openCommand = () => {
-  if (!commandDialog) return;
-  closeMenu();
-  commandDialog.showModal();
-  commandSearch.value = "";
-  commandItems.forEach((item) => (item.hidden = false));
-  if (commandEmpty) commandEmpty.hidden = true;
-  window.requestAnimationFrame(() => commandSearch?.focus());
-};
-
-commandOpeners.forEach((button) => button.addEventListener("click", openCommand));
-commandClose?.addEventListener("click", () => commandDialog?.close());
-commandDialog?.addEventListener("click", (event) => {
-  if (event.target === commandDialog) commandDialog.close();
-});
-
-commandSearch?.addEventListener("input", () => {
-  const query = commandSearch.value.trim().toLowerCase();
-  let visibleCount = 0;
-  commandItems.forEach((item) => {
-    const searchable = `${item.textContent} ${item.dataset.search}`.toLowerCase();
-    const isVisible = searchable.includes(query);
-    item.hidden = !isVisible;
-    if (isVisible) visibleCount += 1;
-  });
-  if (commandEmpty) commandEmpty.hidden = visibleCount !== 0;
-});
-
-commandItems.forEach((item) => {
-  item.addEventListener("click", () => commandDialog?.close());
+projectDialog?.addEventListener("close", () => {
+  lastProjectOpener?.focus();
 });
 
 document.addEventListener("keydown", (event) => {
-  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-    event.preventDefault();
-    if (commandDialog?.open) commandDialog.close();
-    else openCommand();
-    return;
-  }
-
   if (event.key === "Escape" && menuButton?.getAttribute("aria-expanded") === "true") {
     closeMenu();
     menuButton.focus();
