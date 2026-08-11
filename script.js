@@ -72,7 +72,7 @@ const stackContent = {
   },
   services: {
     copy: "REST endpoints, authentication, validation, error boundaries, and role-aware application behaviour.",
-    link: "See Movies Management and User API",
+    link: "See Movies Management",
   },
   data: {
     copy: "Relational persistence, source reconciliation, encrypted storage, and Azure and AWS integrations.",
@@ -165,12 +165,12 @@ const skillContent = {
   backend: {
     title: "Services with clear contracts and lifecycle rules.",
     copy: "ASP.NET Core, Node.js, Express, REST APIs, authentication, and validation.",
-    evidence: ["Movies Management role-based API", "User and Terms versioning flows"],
+    evidence: ["Movies Management role-based API"],
   },
   data: {
     title: "Models that preserve meaning across system boundaries.",
     copy: "PostgreSQL, SQL Server, Prisma, EF Core, Pandas, and source reconciliation.",
-    evidence: ["NewStart NZ geographic mapping layer", "Soft-delete email reuse constraints"],
+    evidence: ["NewStart NZ geographic mapping layer", "Movies Management relational model"],
   },
   cloud: {
     title: "Cloud services used as part of a working product path.",
@@ -180,7 +180,7 @@ const skillContent = {
   quality: {
     title: "Tests focused on behaviour that would be costly to break.",
     copy: "Vitest, Supertest, unit testing, integration testing, and explicit error handling.",
-    evidence: ["Critical User API integration flows", "Unit-tested Java and cloud behaviour"],
+    evidence: ["Integration-tested service behaviour", "Unit-tested Java and cloud behaviour"],
   },
 };
 
@@ -218,7 +218,7 @@ const toolContent = {
     group: "Interface",
     name: "TypeScript",
     copy: "Typed application boundaries across reusable client components and REST service code.",
-    evidence: ["SkillPath application state", "User & Terms API"],
+    evidence: ["SkillPath application state"],
     icon: "tech-typescript",
   },
   html: {
@@ -252,8 +252,8 @@ const toolContent = {
   node: {
     group: "Services",
     name: "Node.js",
-    copy: "REST service behaviour with validation, lifecycle rules, persistence, and centralised errors.",
-    evidence: ["User & Terms API", "Critical integration flows"],
+    copy: "REST service behaviour with validation, persistence, and centralised errors.",
+    evidence: ["Validation boundaries", "Centralised error handling"],
     icon: "tech-node",
   },
   java: {
@@ -273,15 +273,15 @@ const toolContent = {
   postgresql: {
     group: "Data",
     name: "PostgreSQL",
-    copy: "Relational persistence for users, lifecycle state, and versioned terms acceptance.",
-    evidence: ["User & Terms data model", "Integration-tested persistence"],
+    copy: "Relational persistence with explicit constraints and lifecycle state.",
+    evidence: ["Relational data modelling", "Integration-tested persistence"],
     icon: "tech-postgresql",
   },
   prisma: {
     group: "Data",
     name: "Prisma",
-    copy: "Typed persistence boundaries and migrations for explicit user and terms rules.",
-    evidence: ["Soft-delete email reuse", "Versioned terms records"],
+    copy: "Typed persistence boundaries and migrations for explicit data rules.",
+    evidence: ["Schema migrations", "Typed persistence"],
     icon: "tech-prisma",
   },
   sqlserver: {
@@ -396,16 +396,6 @@ const projectDetails = {
     evidence: ["Role-based access", "Image and map inputs", "Pagination and filtering"],
     stack: ".NET 9 · React 19 · EF Core · SQL Server · Azure",
     href: "https://github.com/pds1123/movies-management-app",
-  },
-  "user-api": {
-    kicker: "Backend · Versioned terms",
-    title: "User & Terms API",
-    lead: "A TypeScript REST API centred on validation, persistence rules, and tested user lifecycle behaviour.",
-    problem: "User deletion, email reuse, and terms acceptance create connected lifecycle and data-integrity rules.",
-    engineering: "Zod validates request boundaries, Prisma and PostgreSQL preserve state, and integration tests cover critical flows and centralised errors.",
-    evidence: ["Soft-delete email reuse", "Versioned terms acceptance", "Integration tests for critical flows"],
-    stack: "Node.js · Express · TypeScript · Prisma · PostgreSQL · Vitest",
-    href: "https://github.com/pds1123/User_API",
   },
 };
 

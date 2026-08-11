@@ -19,7 +19,7 @@
     <link rel="canonical" href="https://pds1123.github.io/" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css?v=dialog-visual" />
-    <script src="script.js?v=dialog-visual" defer></script>
+    <script src="script.js?v=project-update" defer></script>
     <title>Disi Pan | Full-stack Developer in Auckland</title>
   </head>
 
@@ -78,10 +78,6 @@
 
             <div class="hero-actions" aria-label="Primary actions">
               <a class="button button-primary" href="#work">View selected work</a>
-              <a class="button button-secondary" href="assets/Disi_Pan_CV.pdf" target="_blank">
-                View CV
-                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" /></svg>
-              </a>
             </div>
 
             <ul class="hero-notes" aria-label="Professional highlights">
@@ -240,25 +236,6 @@
               </div>
             </article>
 
-            <article class="project-card project-card-compact" data-project data-category="backend data">
-              <div class="project-copy">
-                <div class="project-heading">
-                  <h3>User &amp; Terms API</h3>
-                  <div class="project-index">Node / API</div>
-                </div>
-                <p>
-                  A TypeScript REST API with Zod validation, password hashing, Prisma and PostgreSQL,
-                  soft-delete email reuse, versioned terms, centralised errors, and integration tests.
-                </p>
-                <ul class="tech-list" aria-label="User and Terms API technologies">
-                  <li>Node.js</li><li>Express</li><li>Prisma</li><li>PostgreSQL</li><li>Vitest</li>
-                </ul>
-              </div>
-              <div class="compact-actions">
-                <button class="inspect-link" type="button" data-project-open="user-api">Inspect</button>
-                <a class="round-link" href="https://github.com/pds1123/User_API" target="_blank" rel="noreferrer" aria-label="View User and Terms API on GitHub">↗</a>
-              </div>
-            </article>
           </div>
 
           <p class="filter-empty" hidden data-filter-empty>No projects match this filter.</p>
@@ -367,7 +344,7 @@
                 <div class="tech-icon-list">
                   <button type="button" data-tech="dotnet" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-dotnet"></use></svg><span>.NET</span><small>Movies API</small></button>
                   <button type="button" data-tech="csharp" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-csharp"></use></svg><span>C#</span><small>Web + Unity</small></button>
-                  <button type="button" data-tech="node" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-node"></use></svg><span>Node.js</span><small>User API</small></button>
+                  <button type="button" data-tech="node" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-node"></use></svg><span>Node.js</span><small>REST services</small></button>
                   <button type="button" data-tech="java" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-java"></use></svg><span>Java</span><small>Service logic</small></button>
                 </div>
               </section>
@@ -376,7 +353,7 @@
                 <div class="tech-group-heading"><h4 id="data-tools">Data</h4><span>04</span></div>
                 <div class="tech-icon-list">
                   <button type="button" data-tech="python" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-python"></use></svg><span>Python</span><small>Data pipeline</small></button>
-                  <button type="button" data-tech="postgresql" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-postgresql"></use></svg><span>PostgreSQL</span><small>User API</small></button>
+                  <button type="button" data-tech="postgresql" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-postgresql"></use></svg><span>PostgreSQL</span><small>Relational data</small></button>
                   <button type="button" data-tech="prisma" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-prisma"></use></svg><span>Prisma</span><small>Persistence</small></button>
                   <button type="button" data-tech="sqlserver" aria-pressed="false" aria-controls="tech-detail"><svg class="tech-logo" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="52" height="52"><use href="#tech-sqlserver"></use></svg><span>SQL Server</span><small>Movies data</small></button>
                 </div>
@@ -406,10 +383,6 @@
             <li>
               <h3>When two government datasets do not share a map</h3>
               <span>Explicit mappings, coverage reporting, and why missing data should stay visible.</span>
-            </li>
-            <li>
-              <h3>Making soft deletion compatible with email reuse</h3>
-              <span>Constraints, versioned terms, validation, and integration tests for critical flows.</span>
             </li>
             <li>
               <h3>One learning engine, seven question formats</h3>
