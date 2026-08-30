@@ -28,6 +28,7 @@
   --page: min(1160px, calc(100% - 48px));
   --header-height: 66px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 *,
@@ -253,6 +254,7 @@ a {
 .hero h1 {
   max-width: 760px;
   font-size: clamp(3.4rem, 7vw, 5.5rem);
+  animation: hero-title-arrive 720ms var(--ease-out) both;
 }
 
 .hero-intro {
@@ -262,6 +264,7 @@ a {
   font-size: clamp(1.05rem, 1.5vw, 1.24rem);
   line-height: 1.55;
   text-wrap: pretty;
+  animation: hero-side-arrive 620ms 130ms var(--ease-out) both;
 }
 
 .button {
@@ -294,6 +297,31 @@ a {
 
 .hero-side .button {
   margin-top: 30px;
+  animation: hero-side-arrive 620ms 220ms var(--ease-out) both;
+}
+
+@keyframes hero-title-arrive {
+  from {
+    filter: blur(4px);
+    transform: translateY(22px);
+  }
+
+  to {
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-side-arrive {
+  from {
+    filter: blur(2px);
+    transform: translateY(14px);
+  }
+
+  to {
+    filter: blur(0);
+    transform: translateY(0);
+  }
 }
 
 .work-section {
@@ -344,6 +372,7 @@ a {
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  transition: transform 560ms var(--ease-out);
 }
 
 .project-summary h3 {
@@ -353,6 +382,7 @@ a {
   letter-spacing: -0.035em;
   line-height: 1;
   text-wrap: balance;
+  transition: color 220ms ease;
 }
 
 .project-summary p {
@@ -376,6 +406,8 @@ a {
   border-radius: 14px;
   background: var(--white);
   box-shadow: 0 4px 12px rgba(67, 35, 56, 0.1);
+  translate: 0 0;
+  transition: box-shadow 280ms ease, transform 560ms var(--ease-out), translate 280ms var(--ease-out-quart);
 }
 
 .browser-bar {
@@ -409,6 +441,45 @@ a {
   width: 100%;
   height: auto;
   background: var(--surface);
+  transform: scale(1);
+  transition: transform 420ms var(--ease-out);
+}
+
+.motion-enabled [data-project-reveal] .project-summary {
+  transform: translateY(18px);
+}
+
+.motion-enabled [data-project-reveal] .project-browser {
+  transform: translateY(24px);
+}
+
+.motion-enabled [data-project-reveal].is-visible .project-summary,
+.motion-enabled [data-project-reveal].is-visible .project-browser {
+  transform: translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-entry:hover .project-summary h3 {
+    color: var(--accent-strong);
+  }
+
+  .project-entry:hover .project-browser,
+  .motion-enabled [data-project-reveal].is-visible:hover .project-browser {
+    box-shadow: 0 6px 8px rgba(67, 35, 56, 0.14);
+    translate: 0 -4px;
+  }
+
+  .project-entry:hover .project-browser img {
+    transform: scale(1.02);
+  }
+
+  .tech-icon-list li {
+    transition: transform 220ms var(--ease-out-quart);
+  }
+
+  .tech-icon-list li:hover {
+    transform: translateY(-3px);
+  }
 }
 
 .skills-section {
@@ -608,18 +679,41 @@ a {
   border-radius: 14px;
   background: var(--bg);
   color: var(--ink);
+  opacity: 0;
   box-shadow: 0 4px 12px rgba(40, 16, 30, 0.22);
+  transform: translateY(14px) scale(0.985);
+  transition: opacity 220ms ease, transform 300ms var(--ease-out), overlay 300ms allow-discrete,
+    display 300ms allow-discrete;
 }
 
 .project-dialog::backdrop {
   background: rgba(40, 16, 30, 0.58);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 220ms ease, overlay 300ms allow-discrete, display 300ms allow-discrete;
 }
 
 .project-dialog[open] {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.project-dialog[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .project-dialog[open] {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+
+  .project-dialog[open]::backdrop {
+    opacity: 0;
+  }
 }
 
 .dialog-topline {
@@ -680,6 +774,22 @@ a {
 .dialog-visual img {
   width: 100%;
   height: auto;
+}
+
+.project-dialog[open] .dialog-visual {
+  animation: dialog-visual-arrive 420ms 80ms var(--ease-out) both;
+}
+
+@keyframes dialog-visual-arrive {
+  from {
+    clip-path: inset(0 0 8% 0 round 10px);
+    transform: translateY(10px);
+  }
+
+  to {
+    clip-path: inset(0 round 10px);
+    transform: translateY(0);
+  }
 }
 
 .dialog-grid {

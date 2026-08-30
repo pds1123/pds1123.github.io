@@ -17,8 +17,8 @@
     <meta property="og:url" content="https://pds1123.github.io/" />
     <link rel="canonical" href="https://pds1123.github.io/" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=minimal-portfolio" />
-    <script src="script.js?v=minimal-portfolio" defer></script>
+    <link rel="stylesheet" href="styles.css?v=motion-pass-3" />
+    <script src="script.js?v=motion-pass-3" defer></script>
     <title>Disi Pan | Full-stack Developer in Auckland</title>
   </head>
 
@@ -73,13 +73,13 @@
         </div>
 
         <div class="project-list">
-          <article class="project-entry">
+          <article class="project-entry" data-project-reveal>
             <div class="page-shell project-inner">
               <div class="project-summary">
                 <h3>NewStart NZ</h3>
                 <p>
-                  An Auckland housing and safety guide that helps newcomers compare rent, budget,
-                  and crime data before choosing where to live.
+                  An Auckland housing and safety dashboard that brings official rent, crime,
+                  boundary, and population data into one place for newcomers.
                 </p>
                 <button class="button button-primary" type="button" data-project-open="newstart">View details</button>
               </div>
@@ -89,24 +89,24 @@
                   <p>NewStart NZ</p>
                 </div>
                 <img
-                  src="assets/newstart-nz-preview.webp?v=complete"
-                  srcset="assets/newstart-nz-preview.webp?v=complete 560w, assets/newstart-nz-preview@2x.webp?v=complete 1120w"
+                  src="assets/newstart-nz-preview.webp?v=wide-dashboard"
+                  srcset="assets/newstart-nz-preview.webp?v=wide-dashboard 560w, assets/newstart-nz-preview@2x.webp?v=wide-dashboard 1120w"
                   sizes="(max-width: 760px) calc(100vw - 48px), 1040px"
-                  alt="NewStart NZ interface showing rent and safety filters beside an Auckland map"
+                  alt="NewStart NZ dashboard showing Auckland filters, map, rent and safety rankings, and comparison charts"
                   width="1120"
-                  height="700"
+                  height="603"
                 />
               </figure>
             </div>
           </article>
 
-          <article class="project-entry project-entry-soft">
+          <article class="project-entry project-entry-soft" data-project-reveal>
             <div class="page-shell project-inner">
               <div class="project-summary">
                 <h3>SkillPath</h3>
                 <p>
-                  A beginner-friendly IT learning platform with structured paths, guided lessons,
-                  practice activities, progress tracking, and admin-managed content.
+                  A full-stack learning platform that helps beginners and aspiring IT
+                  professionals understand what to learn next.
                 </p>
                 <button class="button button-primary" type="button" data-project-open="skillpath">View details</button>
               </div>
@@ -116,10 +116,10 @@
                   <p>SkillPath</p>
                 </div>
                 <img
-                  src="assets/skillpath-dashboard-wide.webp?v=learning-areas"
-                  srcset="assets/skillpath-dashboard-wide.webp?v=learning-areas 560w, assets/skillpath-dashboard-wide@2x.webp?v=learning-areas 1120w"
+                  src="assets/skillpath-dashboard-wide.webp?v=latest-home"
+                  srcset="assets/skillpath-dashboard-wide.webp?v=latest-home 560w, assets/skillpath-dashboard-wide@2x.webp?v=latest-home 1120w"
                   sizes="(max-width: 760px) calc(100vw - 48px), 1040px"
-                  alt="SkillPath homepage showing Cloud, Data, Software Development, and QA learning areas"
+                  alt="SkillPath homepage presenting structured learning areas for people starting in IT"
                   width="1120"
                   height="630"
                 />
@@ -127,7 +127,7 @@
             </div>
           </article>
 
-          <article class="project-entry">
+          <article class="project-entry" data-project-reveal>
             <div class="page-shell project-inner">
               <div class="project-summary">
                 <h3>Movies Management App</h3>

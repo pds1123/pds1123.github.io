@@ -46,35 +46,57 @@ if ("IntersectionObserver" in window && sections.length) {
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
+const projectRevealItems = [...document.querySelectorAll("[data-project-reveal]")];
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if (!prefersReducedMotion.matches && "IntersectionObserver" in window) {
+  document.documentElement.classList.add("motion-enabled");
+
+  const projectRevealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        projectRevealObserver.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px -12%", threshold: 0.18 },
+  );
+
+  projectRevealItems.forEach((item) => projectRevealObserver.observe(item));
+} else {
+  projectRevealItems.forEach((item) => item.classList.add("is-visible"));
+}
+
 const projectDetails = {
   newstart: {
     title: "NewStart NZ",
-    lead: "A housing and safety guide that helps newcomers compare Auckland locations through rent, budget, and crime data.",
+    lead: "An interactive Auckland dashboard for comparing housing cost and safety through official rent, crime, boundary, and population data.",
     problem: "People arriving in Auckland need to judge affordability and safety together, but the official answers live in separate datasets and use incompatible geographic boundaries.",
-    engineering: "A reconciliation layer combines 556 rent regions and 416 police regions, then a zero-build Leaflet interface turns the result into one filterable decision view.",
-    evidence: ["Official MBIE rent data", "NZ Police safety data", "Missing coverage remains visible"],
-    stack: "Python · MBIE Market Rent API v2 · NZ Police data · Leaflet · HTML",
+    engineering: "A Python data pipeline reconciles 548 MBIE rent areas and 412 Police areas against 172 LINZ suburbs. The standalone dashboard turns the result into a map, rankings, distributions, regional comparisons, and a rent-versus-safety view.",
+    evidence: ["Rent and crime aligned to July 2025–June 2026", "Map, rankings, distributions, and regional comparisons", "Source areas and missing data remain visible"],
+    stack: "Python · MBIE Market Rent API v2 · NZ Police data · LINZ · Leaflet · HTML",
     visual: {
-      src: "assets/newstart-nz-preview.webp?v=complete",
-      srcset: "assets/newstart-nz-preview.webp?v=complete 560w, assets/newstart-nz-preview@2x.webp?v=complete 1120w",
+      src: "assets/newstart-nz-preview.webp?v=wide-dashboard",
+      srcset: "assets/newstart-nz-preview.webp?v=wide-dashboard 560w, assets/newstart-nz-preview@2x.webp?v=wide-dashboard 1120w",
       sizes: "(max-width: 680px) calc(100vw - 72px), 700px",
-      alt: "NewStart NZ interface showing rent and safety filters beside an Auckland map",
+      alt: "NewStart NZ dashboard showing Auckland filters, map, rent and safety rankings, and comparison charts",
       width: 1120,
-      height: 700,
+      height: 603,
     },
   },
   skillpath: {
     title: "SkillPath",
-    lead: "A beginner-friendly platform for building foundational skills across Cloud, Data, and Software Development through structured learning paths, guided lessons, practice, and progress tracking.",
-    problem: "IT learning resources are often fragmented or assume too much prior knowledge, making it difficult for beginners to know what to learn next.",
-    engineering: "A scalable full-stack content model organises learning areas into paths, tutorials, lessons, practice content, and assessments. Admin tools manage each layer as the platform expands into additional IT subjects.",
-    evidence: ["Cloud, Data, and Software Development", "Topic-based lessons and knowledge checks", "Progress tracking and optional certification preparation", "Admin content management"],
-    stack: "React 19 · TypeScript · Vite · Tailwind CSS · Python",
+    lead: "A full-stack learning platform that gives beginners and aspiring IT professionals a clear path from first concepts to guided practice.",
+    problem: "People starting in IT often do not know which skills to learn first, how different topics connect, or what to study next. Existing resources are scattered and frequently assume prior knowledge.",
+    engineering: "The React client connects to an ASP.NET Core API backed by EF Core and SQLite. A shared curriculum and progress model supports multiple learning paths, the API grades answers, and each module remembers where the learner stopped.",
+    evidence: ["Structured learning paths and ordered modules", "Lessons, knowledge checks, and practice modes", "Persistent progress and per-module resume position", "Role-protected content administration"],
+    stack: "React 19 · TypeScript 6 · ASP.NET Core (.NET 10) · EF Core 10 · SQLite",
     visual: {
-      src: "assets/skillpath-dashboard-wide.webp?v=learning-areas",
-      srcset: "assets/skillpath-dashboard-wide.webp?v=learning-areas 560w, assets/skillpath-dashboard-wide@2x.webp?v=learning-areas 1120w",
+      src: "assets/skillpath-dashboard-wide.webp?v=latest-home",
+      srcset: "assets/skillpath-dashboard-wide.webp?v=latest-home 560w, assets/skillpath-dashboard-wide@2x.webp?v=latest-home 1120w",
       sizes: "(max-width: 680px) calc(100vw - 72px), 680px",
-      alt: "SkillPath homepage showing Cloud, Data, Software Development, and QA learning areas",
+      alt: "SkillPath homepage presenting structured learning areas for people starting in IT",
       width: 1120,
       height: 630,
     },
