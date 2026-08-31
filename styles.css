@@ -395,7 +395,25 @@ a {
 }
 
 .project-summary .button {
+  flex: 0 0 auto;
+}
+
+.project-actions {
+  display: flex;
   margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button-secondary {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--accent-strong);
+}
+
+.button-secondary:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .project-browser {
