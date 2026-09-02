@@ -71,8 +71,8 @@ if (!prefersReducedMotion.matches && "IntersectionObserver" in window) {
 const projectDetails = {
   newstart: {
     title: "NewStart NZ",
-    lead: "An interactive rental analytics platform for exploring Auckland housing costs, rental supply, and neighbourhood safety in one place.",
-    problem: "Newcomers choosing where to live in Auckland need to compare rental cost, housing availability, and safety, but the relevant government data is fragmented across different geographic systems.",
+    lead: "An interactive rental analytics platform for exploring housing costs, rental supply, and neighbourhood safety across New Zealand.",
+    problem: "Newcomers choosing where to live in New Zealand need to compare rental cost, housing availability, and safety, but the relevant government data is fragmented across different geographic systems.",
     engineering: "A Python data pipeline reconciles 548 MBIE rent areas and 412 Police areas against 172 LINZ suburbs. The standalone dashboard turns the result into a map, rankings, distributions, regional comparisons, and a rent-versus-safety view.",
     evidence: ["Rent and crime aligned to July 2025–June 2026", "Map, rankings, distributions, and regional comparisons", "Source areas and missing data remain visible"],
     stack: "Python · MBIE Market Rent API v2 · NZ Police data · LINZ · Leaflet · HTML",
