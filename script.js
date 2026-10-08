@@ -72,7 +72,7 @@ const projectDetails = {
   newstart: {
     title: "NewStart NZ",
     lead: "An interactive rental analytics platform for comparing housing costs, rental supply, and neighbourhood safety across New Zealand.",
-    problem: "People choosing where to live need to compare rent, availability, and safety, but the relevant government datasets use different boundaries and cannot be compared directly.",
+    problem: "Rental listings rarely show the full trade-off between weekly cost, housing availability, and neighbourhood safety. People moving to a new area need a faster way to compare places using trustworthy public data.",
     engineering: "A reproducible Python pipeline collects MBIE rent data, normalises NZ Police exports, and reconciles both sources against 172 LINZ suburbs. The zero-build Leaflet dashboard supports regional drill-down, rankings, distributions, source-area inspection, and touch-friendly controls.",
     evidence: ["Rent and crime aligned to the same 12-month period", "Regional drill-down, rankings, distributions, and comparisons", "Source areas and missing data remain visible", "Responsive layout and touch interactions"],
     stack: "Python · MBIE Market Rent API v2 · NZ Police data · LINZ · Leaflet · HTML",
